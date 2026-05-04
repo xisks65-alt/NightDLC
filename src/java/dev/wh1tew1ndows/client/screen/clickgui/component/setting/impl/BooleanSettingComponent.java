@@ -54,26 +54,39 @@ import net.mojang.blaze3d.matrix.MatrixStack;
         float checkboxX = position.x + size.x - checkboxSize - padding;
         float checkboxY = position.y + 2 + margin + (valueHeight / 2f) - (checkboxSize / 2f);
 
-        // рисуем фон чекбокса
-        RenderUtil.Rounded.smooth(matrix, checkboxX, checkboxY, checkboxSize, checkboxSize, ColorUtil.multAlpha(accentColor(), 0.1F), Round.of(3));
-        RenderUtil.Rounded.roundedOutline(matrix, checkboxX, checkboxY, checkboxSize, checkboxSize, 1, ColorUtil.multAlpha(accentColor(), 0.2F), Round.of(3));
+        float animVal = (float) value.getAnimation().get();
 
-        // рисуем галочку (иконку), тоже по центру квадрата
+        // свечение вокруг чекбокса когда включен
+        if (animVal > 0.01f) {
+            RenderUtil.Shadow.drawShadow(matrix, checkboxX, checkboxY, checkboxSize, checkboxSize, 5,
+                    ColorUtil.replAlpha(accentColor(), (int)(alpha() * 0.35f * animVal)));
+        }
+
+        // фон чекбокса с градиентом
+        int cbBg = ColorUtil.overCol(
+                ColorUtil.multAlpha(accentColor(), 0.1F),
+                ColorUtil.multAlpha(accentColor(), 0.35F), animVal);
+        RenderUtil.Rounded.smooth(matrix, checkboxX, checkboxY, checkboxSize, checkboxSize, cbBg, Round.of(3));
+        int cbOutline = ColorUtil.overCol(
+                ColorUtil.multAlpha(accentColor(), 0.2F),
+                ColorUtil.multAlpha(accentColor(), 0.6F), animVal);
+        RenderUtil.Rounded.roundedOutline(matrix, checkboxX, checkboxY, checkboxSize, checkboxSize, 1, cbOutline, Round.of(3));
+
         Fonts.ICON_DESHUX.draw(
                 matrix,
                 "n",
-                checkboxX + (checkboxSize / 2f) - 3.85F, // 4 = половина иконки (примерно)
+                checkboxX + (checkboxSize / 2f) - 3.85F,
                 checkboxY + (checkboxSize / 2f) - 3,
-                ColorUtil.overCol(ColorUtil.getColor(0, 0), accentColor(), value.getAnimation().get()),
+                ColorUtil.overCol(ColorUtil.getColor(0, 0), accentColor(), animVal),
                 8
         );
 
         Fonts.MONTSERRAT_MEDIUM.draw(
                 matrix,
                 "×",
-                checkboxX + (checkboxSize / 2f) - 3.3F, // 4 = половина иконки (примерно)
+                checkboxX + (checkboxSize / 2f) - 3.3F,
                 checkboxY + (checkboxSize / 2f) - 6.65F,
-                ColorUtil.overCol(accentColor(), ColorUtil.getColor(0, 0), value.getAnimation().get()),
+                ColorUtil.overCol(accentColor(), ColorUtil.getColor(0, 0), animVal),
                 12
         );
 

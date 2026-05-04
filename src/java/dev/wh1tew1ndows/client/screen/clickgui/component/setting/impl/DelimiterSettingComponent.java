@@ -2,6 +2,7 @@ package dev.wh1tew1ndows.client.screen.clickgui.component.setting.impl;
 
 import dev.wh1tew1ndows.client.managers.module.settings.impl.DelimiterSetting;
 import dev.wh1tew1ndows.client.screen.clickgui.component.setting.SettingComponent;
+import dev.wh1tew1ndows.client.utils.render.color.ColorUtil;
 import dev.wh1tew1ndows.client.utils.render.draw.RenderUtil;
 import dev.wh1tew1ndows.client.utils.render.draw.Round;
 import dev.wh1tew1ndows.client.utils.render.font.Fonts;
@@ -42,7 +43,15 @@ public class DelimiterSettingComponent extends SettingComponent {
         boolean lineCheck = textWidth > (size.x - margin - lineWidth - margin);
 
 
-        RenderUtil.Rounded.smooth(matrix, position.x + size.x - margin - (lineCheck ? lineWidth : (size.x - margin - textWidth - margin)), position.y + (margin + 8 + margin) / 2F + 0.07F, (lineCheck ? lineWidth : (size.x - margin - textWidth - margin)) + margin, line, backgroundColorS(), Round.of(0.5F));
+        float lineX = position.x + size.x - margin - (lineCheck ? lineWidth : (size.x - margin - textWidth - margin));
+        float lineY = position.y + (margin + 8 + margin) / 2F + 0.07F;
+        float lineW = (lineCheck ? lineWidth : (size.x - margin - textWidth - margin)) + margin;
+        int lineColLeft = ColorUtil.multAlpha(accentColor(), 0.4F);
+        int lineColRight = ColorUtil.multAlpha(accentColor(), 0.05F);
+        RenderUtil.Rounded.smooth(matrix, lineX, lineY, lineW, line,
+                lineColLeft, lineColRight, lineColRight, lineColLeft, Round.of(0.5F));
+        RenderUtil.Shadow.drawShadow(matrix, lineX, lineY, lineW * 0.5f, line, 2,
+                ColorUtil.replAlpha(accentColor(), (int)(alpha() * 0.15f)));
 
         //   RectUtil.drawRect(matrix, position.x + size.x - margin - (lineCheck ? lineWidth : (size.x - margin - textWidth - margin)), position.y + (margin + 8 + margin) / 2F - line / 2F, (lineCheck ? lineWidth : (size.x - margin - textWidth - margin)) + margin, line, accentColor());
 

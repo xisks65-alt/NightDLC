@@ -6,6 +6,7 @@ import dev.wh1tew1ndows.client.managers.module.settings.impl.MultiBooleanSetting
 import dev.wh1tew1ndows.client.screen.clickgui.component.setting.SettingComponent;
 import dev.wh1tew1ndows.client.utils.animation.util.Easings;
 import dev.wh1tew1ndows.client.utils.render.color.ColorUtil;
+import dev.wh1tew1ndows.client.utils.render.draw.RenderUtil;
 import dev.wh1tew1ndows.client.utils.render.draw.RenderUtil.Rounded;
 import dev.wh1tew1ndows.client.utils.render.draw.Round;
 import dev.wh1tew1ndows.client.utils.render.font.Fonts;
@@ -59,9 +60,19 @@ public class MultiBooleanSettingComponent extends SettingComponent {
                     var7 += 7.0F + var8;
                 }
 
-                Rounded.smooth(var1, this.position.x + this.margin + var6 - var9, this.position.y + (this.margin / 2) + this.margin + var5 + var7 + this.margin / 2.0F, Fonts.MONTSERRAT_MEDIUM.getWidth(var11.getName(), 6.5F) + var9 * 2.0F, 7.0F + var9 * 2.0F, ColorUtil.overCol(this.backColor(), ColorUtil.multAlpha(this.accentColor(), 0.1F), var11.getAnimation().get()), Round.of(3.0F));
-                Rounded.roundedOutline(var1, this.position.x + this.margin + var6 - var9, this.position.y + (this.margin / 2) + this.margin + var5 + var7 + this.margin / 2.0F, Fonts.MONTSERRAT_MEDIUM.getWidth(var11.getName(), 6.5F) + var9 * 2.0F, 7.0F + var9 * 2.0F, 1, ColorUtil.overCol(0, ColorUtil.multAlpha(this.accentColor(), 0.2F), var11.getAnimation().get()), Round.of(3.0F));
-                Fonts.MONTSERRAT_MEDIUM.draw(var1, var11.getName(), this.position.x + this.margin + var6, this.position.y + (this.margin / 2) + this.margin + var5 + var7 + this.margin / 2.0F + var9 + 0.1F, this.getWhite(), 6.5F);
+                float pillX = this.position.x + this.margin + var6 - var9;
+                float pillY = this.position.y + (this.margin / 2) + this.margin + var5 + var7 + this.margin / 2.0F;
+                float pillW = Fonts.MONTSERRAT_MEDIUM.getWidth(var11.getName(), 6.5F) + var9 * 2.0F;
+                float pillH = 7.0F + var9 * 2.0F;
+                float selVal = (float) var11.getAnimation().get();
+                if (selVal > 0.01f) {
+                    RenderUtil.Shadow.drawShadow(var1, pillX, pillY, pillW, pillH, 4,
+                            ColorUtil.replAlpha(this.accentColor(), (int)(this.alpha() * 0.25f * selVal)));
+                }
+                Rounded.smooth(var1, pillX, pillY, pillW, pillH, ColorUtil.overCol(this.backColor(), ColorUtil.multAlpha(this.accentColor(), 0.15F), selVal), Round.of(3.0F));
+                Rounded.roundedOutline(var1, pillX, pillY, pillW, pillH, 1, ColorUtil.overCol(0, ColorUtil.multAlpha(this.accentColor(), 0.3F), selVal), Round.of(3.0F));
+                int textCol = ColorUtil.overCol(this.getWhite(), this.accentColor(), selVal * 0.5f);
+                Fonts.MONTSERRAT_MEDIUM.draw(var1, var11.getName(), this.position.x + this.margin + var6, pillY + var9 + 0.1F, textCol, 6.5F);
                 var6 += var12;
             }
         }

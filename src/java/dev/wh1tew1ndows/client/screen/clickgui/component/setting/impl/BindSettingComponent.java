@@ -53,7 +53,19 @@ public class BindSettingComponent extends SettingComponent {
         int backColorBright = ColorUtil.multDark(accentColor(), 0.5F);
         int backColor = ColorUtil.overCol(backColorDark, backColorBright, value.getAnimation().get());
 
-        RenderUtil.Rounded.smooth(matrix, position.x + size.x - valueWidth - out, position.y + margin, valueWidth + (out * 2), 7 + (out * 2), backColor, backColorDark, backColor, backColorDark, Round.of(2));
+        float btnX = position.x + size.x - valueWidth - out;
+        float btnY = position.y + margin;
+        float btnW = valueWidth + (out * 2);
+        float btnH = 7 + (out * 2);
+        float bindVal = (float) value.getAnimation().get();
+
+        if (bindVal > 0.01f) {
+            RenderUtil.Shadow.drawShadow(matrix, btnX, btnY, btnW, btnH, 5,
+                    ColorUtil.replAlpha(accentColor(), (int)(alpha() * 0.3f * bindVal)));
+        }
+        RenderUtil.Rounded.smooth(matrix, btnX, btnY, btnW, btnH, backColor, backColorDark, backColor, backColorDark, Round.of(2));
+        RenderUtil.Rounded.roundedOutline(matrix, btnX, btnY, btnW, btnH, 0.5F,
+                ColorUtil.multAlpha(accentColor(), 0.15F + 0.2F * bindVal), Round.of(2));
 
         Fonts.MONTSERRAT_MEDIUM.drawRight(matrix, valueName, position.x + size.x, position.y + margin + out, getWhite(), 7);
 

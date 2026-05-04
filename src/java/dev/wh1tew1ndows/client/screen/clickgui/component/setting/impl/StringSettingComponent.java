@@ -39,7 +39,16 @@ public class StringSettingComponent extends SettingComponent {
     public void render(MatrixStack matrix, int mouseX, int mouseY, float partialTicks) {
         super.render(matrix, mouseX, mouseY, partialTicks);
         float valueHeight = drawName(matrix, mouseX, mouseY, size.x);
-        RenderUtil.Rounded.smooth(matrix, position.x, position.y + margin + valueHeight + margin, size.x, margin + fontSize + margin, backColor(), Round.of(2));
+        float fieldY = position.y + margin + valueHeight + margin;
+        float fieldH = margin + fontSize + margin;
+        boolean selected = textBox.selected;
+        if (selected) {
+            RenderUtil.Shadow.drawShadow(matrix, position.x, fieldY, size.x, fieldH, 4,
+                    ColorUtil.replAlpha(accentColor(), (int)(alpha() * 0.2f)));
+        }
+        RenderUtil.Rounded.smooth(matrix, position.x, fieldY, size.x, fieldH, backColor(), Round.of(2));
+        RenderUtil.Rounded.roundedOutline(matrix, position.x, fieldY, size.x, fieldH, 0.5F,
+                ColorUtil.multAlpha(accentColor(), selected ? 0.35F : 0.1F), Round.of(2));
 
         textBox.setColor(getWhite());
         textBox.getPosition().set(position.x + margin, position.y + margin + valueHeight + margin + margin);

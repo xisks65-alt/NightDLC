@@ -64,8 +64,12 @@ public class ColorSettingComponent extends SettingComponent implements IRender {
 
         float valueHeight = drawName(matrix, mouseX, mouseY, size.x - valueWidth - margin - out * 2F);
 
-        RenderUtil.Shadow.drawShadow(matrix, position.x + size.x - valueWidth - out, position.y + margin + out, valueWidth, fontSize, fontSize, ColorUtil.replAlpha(value.getValue(), alpha()));
-        RenderUtil.Rounded.smooth(matrix, position.x + size.x - valueWidth - out, position.y + margin + out, valueWidth, fontSize, ColorUtil.replAlpha(value.getValue(), alpha()), Round.of(fontSize / 2F));
+        float previewX = position.x + size.x - valueWidth - out;
+        float previewY = position.y + margin + out;
+        RenderUtil.Shadow.drawShadow(matrix, previewX, previewY, valueWidth, fontSize, 6, ColorUtil.replAlpha(value.getValue(), (int)(alpha() * 0.5f)));
+        RenderUtil.Rounded.smooth(matrix, previewX, previewY, valueWidth, fontSize, ColorUtil.replAlpha(value.getValue(), alpha()), Round.of(fontSize / 2F));
+        RenderUtil.Rounded.roundedOutline(matrix, previewX, previewY, valueWidth, fontSize, 0.5F,
+                ColorUtil.replAlpha(ColorUtil.getColor(255), (int)(alpha() * 0.15f)), Round.of(fontSize / 2F));
 
         float xPicker = position.x;
         float yPicker = position.y + margin + valueHeight + margin;
@@ -106,14 +110,26 @@ public class ColorSettingComponent extends SettingComponent implements IRender {
 
         float pickerWidth = 2;
         // hue
-        RenderUtil.Rounded.smooth(matrix, xPicker + huePointer - (1.5F), yPicker + margin, 3, sliderHeight, backgroundColor(), Round.of((pickerWidth / 2F)));
-        RenderUtil.Rounded.smooth(matrix, xPicker + huePointer - (pickerWidth / 2F), yPicker + margin, pickerWidth, sliderHeight, getWhite(), Round.of((pickerWidth / 2F)));
+        float hueKnobX = xPicker + huePointer - (pickerWidth / 2F);
+        float hueKnobY = yPicker + margin;
+        RenderUtil.Shadow.drawShadow(matrix, hueKnobX, hueKnobY, pickerWidth, sliderHeight, 3,
+                ColorUtil.replAlpha(ColorUtil.getColor(255), (int)(alpha() * 0.4f)));
+        RenderUtil.Rounded.smooth(matrix, xPicker + huePointer - (1.5F), hueKnobY, 3, sliderHeight, backgroundColor(), Round.of((pickerWidth / 2F)));
+        RenderUtil.Rounded.smooth(matrix, hueKnobX, hueKnobY, pickerWidth, sliderHeight, getWhite(), Round.of((pickerWidth / 2F)));
         // saturation
-        RenderUtil.Rounded.smooth(matrix, xPicker + saturationPointer - (1.5F), yPicker + margin + sliderHeight + margin, 3, sliderHeight, backgroundColor(), Round.of((pickerWidth / 2F)));
-        RenderUtil.Rounded.smooth(matrix, xPicker + saturationPointer - (pickerWidth / 2F), yPicker + margin + sliderHeight + margin, pickerWidth, sliderHeight, getWhite(), Round.of((pickerWidth / 2F)));
+        float satKnobX = xPicker + saturationPointer - (pickerWidth / 2F);
+        float satKnobY = yPicker + margin + sliderHeight + margin;
+        RenderUtil.Shadow.drawShadow(matrix, satKnobX, satKnobY, pickerWidth, sliderHeight, 3,
+                ColorUtil.replAlpha(ColorUtil.getColor(255), (int)(alpha() * 0.4f)));
+        RenderUtil.Rounded.smooth(matrix, xPicker + saturationPointer - (1.5F), satKnobY, 3, sliderHeight, backgroundColor(), Round.of((pickerWidth / 2F)));
+        RenderUtil.Rounded.smooth(matrix, satKnobX, satKnobY, pickerWidth, sliderHeight, getWhite(), Round.of((pickerWidth / 2F)));
         // lightness
-        RenderUtil.Rounded.smooth(matrix, xPicker + lightnessPointer - (1.5F), yPicker + margin + sliderHeight + margin + sliderHeight + margin, 3, sliderHeight, backgroundColor(), Round.of((pickerWidth / 2F)));
-        RenderUtil.Rounded.smooth(matrix, xPicker + lightnessPointer - (pickerWidth / 2F), yPicker + margin + sliderHeight + margin + sliderHeight + margin, pickerWidth, sliderHeight, getWhite(), Round.of((pickerWidth / 2F)));
+        float litKnobX = xPicker + lightnessPointer - (pickerWidth / 2F);
+        float litKnobY = yPicker + margin + sliderHeight + margin + sliderHeight + margin;
+        RenderUtil.Shadow.drawShadow(matrix, litKnobX, litKnobY, pickerWidth, sliderHeight, 3,
+                ColorUtil.replAlpha(ColorUtil.getColor(255), (int)(alpha() * 0.4f)));
+        RenderUtil.Rounded.smooth(matrix, xPicker + lightnessPointer - (1.5F), litKnobY, 3, sliderHeight, backgroundColor(), Round.of((pickerWidth / 2F)));
+        RenderUtil.Rounded.smooth(matrix, litKnobX, litKnobY, pickerWidth, sliderHeight, getWhite(), Round.of((pickerWidth / 2F)));
 
         size.y = margin + valueHeight + margin + margin + sliderHeight + margin + sliderHeight + margin + sliderHeight + margin + margin - 1;
     }
