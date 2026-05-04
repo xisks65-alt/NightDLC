@@ -162,6 +162,17 @@ public class ModuleComponent extends WindowComponent {
                     ColorUtil.replAlpha(themeColor, (int)(alpha * 255 * 0.3f * enabledVal)));
         }
 
+        // статус-точка при включении
+        if (enabledVal > 0.01f) {
+            float dotSize = 3f;
+            float dotX = px + pw - dotSize - 4;
+            float dotY = py + 4;
+            int dotCol = ColorUtil.multAlpha(themeColor, 0.8F * alpha * enabledVal);
+            RenderUtil.Rounded.smooth(matrix, dotX, dotY, dotSize, dotSize, dotCol, Round.of(dotSize / 2));
+            RenderUtil.Shadow.drawShadow(matrix, dotX - 1, dotY - 1, dotSize + 2, dotSize + 2, 5,
+                    ColorUtil.replAlpha(themeColor, (int)(alpha * 255 * 0.3f * enabledVal)));
+        }
+
         // градиентный фон при включении
         int clientcolors = ColorUtil.overCol(
                 ColorUtil.multAlpha(themeColor, 0.035F * alpha),
@@ -199,10 +210,14 @@ public class ModuleComponent extends WindowComponent {
                 : module.getName();
 
 
+        int textBaseCol = ColorUtil.overCol(
+                ColorUtil.replAlpha(ColorUtil.getColor(200), alphaPC()),
+                ColorUtil.replAlpha(ColorUtil.multBright(themeColor, 0.85F), alphaPC()),
+                enabledVal * 0.6f);
         Fonts.MONTSERRAT_MEDIUM.draw(matrix, moduleText,
                 position.x + 7,
                 position.y + (size.y / 2F) - (7 / 2F) - 0.15F,
-                ColorUtil.replAlpha(ColorUtil.getColor(200), alphaPC()), 7);
+                textBaseCol, 7);
 
         float badgeX = position.x + 7 + (Fonts.MONTSERRAT_MEDIUM.getWidth(moduleText, 7)) + 1F;
         float badgeY = position.y + (size.y / 2F) - (8 / 2F);
