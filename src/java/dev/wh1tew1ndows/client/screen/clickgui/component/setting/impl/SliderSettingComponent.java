@@ -58,11 +58,24 @@ public class SliderSettingComponent extends SettingComponent {
         int backColorDark = ColorUtil.multDark(accentColor(), 0.5F);
         int backColor = ColorUtil.overCol(backColorDark, accentColor(), value.getAnimation().get());
 
-        RenderUtil.Rounded.smooth(matrix, position.x, position.y + margin + margin + margin / 2 + margin + margin+ valueHeight + margin, size.x, sliderHeight, backColor(), Round.of(sliderHeight / 2F));
-        RenderUtil.Rounded.smooth(matrix, position.x, position.y + margin + margin + margin / 2 + margin + margin+ valueHeight + margin, (float) value.getAnimation().getValue(), sliderHeight, backColor, backColor, backColorDark, backColorDark, Round.of(sliderHeight / 2F));
+        float trackY = position.y + margin + margin + margin / 2 + margin + margin + valueHeight + margin;
+        float animValue = (float) value.getAnimation().getValue();
+        float filledFrac = size.x > 0 ? animValue / size.x : 0;
+
+        RenderUtil.Rounded.smooth(matrix, position.x, trackY, size.x, sliderHeight, backColor(), Round.of(sliderHeight / 2F));
+        // свечение заполненной части слайдера
+        if (filledFrac > 0.01f) {
+            RenderUtil.Shadow.drawShadow(matrix, position.x, trackY, animValue, sliderHeight, 3,
+                    ColorUtil.replAlpha(accentColor(), (int)(alpha() * 0.25f)));
+        }
+        RenderUtil.Rounded.smooth(matrix, position.x, trackY, animValue, sliderHeight, backColor, backColor, backColorDark, backColorDark, Round.of(sliderHeight / 2F));
         float circleSize = drag ? 6 : 4;
-        RenderUtil.Rounded.smooth(matrix, position.x + (float) (value.getAnimation().getValue()) - (circleSize / 2F), position.y + margin / 2 + margin + margin + margin  + margin + valueHeight + margin - (circleSize / 2F) + (sliderHeight / 2F), circleSize, circleSize, getWhite(), Round.of((circleSize / 2F)));
-        //RenderUtil.Rounded.smooth(matrix, position.x + (float) (value.getAnimation().getValue()) - (circleSize / 4F), position.y + margin + valueHeight + margin - (circleSize / 4F) + (sliderHeight / 2F), circleSize / 2F, circleSize / 2F, accentColor(), Round.of((circleSize / 4F)));
+        float knobX = position.x + animValue - (circleSize / 2F);
+        float knobY = position.y + margin / 2 + margin + margin + margin + margin + valueHeight + margin - (circleSize / 2F) + (sliderHeight / 2F);
+        // свечение под кружком
+        RenderUtil.Shadow.drawShadow(matrix, knobX, knobY, circleSize, circleSize, 4,
+                ColorUtil.replAlpha(accentColor(), (int)(alpha() * 0.4f)));
+        RenderUtil.Rounded.smooth(matrix, knobX, knobY, circleSize, circleSize, getWhite(), Round.of((circleSize / 2F)));
 
         if (drag) {
             long currentTime = System.currentTimeMillis();
@@ -80,8 +93,12 @@ public class SliderSettingComponent extends SettingComponent {
             ));
         }
 
-        RenderUtil.Rounded.smooth(matrix, position.x + size.x - margin - Fonts.MONTSERRAT_MEDIUM.getWidth(currentValue, 7) - 3, position.y + margin, 6 + Fonts.MONTSERRAT_MEDIUM.getWidth(currentValue, 7), 11, ColorUtil.multAlpha(accentColor(), 0.15F * alphaPC()), Round.of(3.5F));
-        RenderUtil.Rounded.roundedOutline(matrix, position.x + size.x - margin - Fonts.MONTSERRAT_MEDIUM.getWidth(currentValue, 7) - 3, position.y + margin, 6 + Fonts.MONTSERRAT_MEDIUM.getWidth(currentValue, 7), 11, 1, ColorUtil.multAlpha(accentColor(), 0.25F * alphaPC()), Round.of(3.5F));
+        float badgeX = position.x + size.x - margin - Fonts.MONTSERRAT_MEDIUM.getWidth(currentValue, 7) - 3;
+        float badgeW = 6 + Fonts.MONTSERRAT_MEDIUM.getWidth(currentValue, 7);
+        RenderUtil.Shadow.drawShadow(matrix, badgeX, position.y + margin, badgeW, 11, 3,
+                ColorUtil.replAlpha(accentColor(), (int)(alpha() * 0.15f)));
+        RenderUtil.Rounded.smooth(matrix, badgeX, position.y + margin, badgeW, 11, ColorUtil.multAlpha(accentColor(), 0.15F * alphaPC()), Round.of(3.5F));
+        RenderUtil.Rounded.roundedOutline(matrix, badgeX, position.y + margin, badgeW, 11, 1, ColorUtil.multAlpha(accentColor(), 0.25F * alphaPC()), Round.of(3.5F));
         //  Fonts.MONTSERRAT_MEDIUMdraw(matrix, String.valueOf(value.min), position.x, position.y + margin + valueHeight + margin + sliderHeight + margin, ColorUtil.multDark(getWhite(), 0.75F), fontSize);
         Fonts.MONTSERRAT_MEDIUM.drawRight(matrix, currentValue, position.x + size.x - margin, position.y + margin + 2.1F, ColorUtil.replAlpha(getWhite(), alpha()), 7);
         // font.drawRight(matrix, String.valueOf(value.max), position.x + size.x, position.y + margin + valueHeight + margin + sliderHeight + margin, ColorUtil.multDark(getWhite(), 0.75F), fontSize);

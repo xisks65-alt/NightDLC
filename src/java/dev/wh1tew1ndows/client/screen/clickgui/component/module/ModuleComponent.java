@@ -117,54 +117,61 @@ public class ModuleComponent extends WindowComponent {
         final float hoverVal = hoverAnimation.get();
 
 
-        RenderUtil.Rounded.smooth(
-                matrix,
-                position.x + APPEND, position.y + APPEND,
-                size.x - (APPEND * 2F), size.y - (APPEND * 2F),
-                ColorUtil.multAlpha(InterFace.getInstance().themeColor(), 0.035F * alpha),
-                Round.of(4)
-        );
+        float px = position.x + APPEND;
+        float py = position.y + APPEND;
+        float pw = size.x - (APPEND * 2F);
+        float ph = size.y - (APPEND * 2F);
+        float enabledVal = (float) module.getAnimation().get();
 
-        // подсветка при наведении — цвет темы
+        // тень под карточкой
+        if (enabledVal > 0.01f) {
+            RenderUtil.Shadow.drawShadow(matrix, px, py, pw, ph, 6,
+                    ColorUtil.replAlpha(ColorUtil.multDark(themeColor, 0.5F),
+                            (int)(alpha * 255 * 0.2f * enabledVal)));
+        }
+
+        // фон карточки с градиентом
+        int bgBase = ColorUtil.multAlpha(themeColor, 0.035F * alpha);
+        int bgBottom = ColorUtil.multAlpha(themeColor, 0.02F * alpha);
+        RenderUtil.Rounded.smooth(matrix, px, py, pw, ph,
+                bgBase, bgBase, bgBottom, bgBottom, Round.of(4));
+
+        // подсветка при наведении
         if (hoverVal > 0.01f) {
-            RenderUtil.Rounded.smooth(
-                    matrix,
-                    position.x + APPEND, position.y + APPEND,
-                    size.x - (APPEND * 2F), size.y - (APPEND * 2F),
-                    ColorUtil.multAlpha(InterFace.getInstance().themeColor(),
-                            (float) Math.min(hoverVal, 1.0) * 0.08F * alpha),
-                    Round.of(4)
-            );
+            float hv = (float) Math.min(hoverVal, 1.0);
+            RenderUtil.Rounded.smooth(matrix, px, py, pw, ph,
+                    ColorUtil.multAlpha(themeColor, hv * 0.1F * alpha), Round.of(4));
+            RenderUtil.Shadow.drawShadow(matrix, px, py, pw, ph, 4,
+                    ColorUtil.replAlpha(ColorUtil.multDark(themeColor, 0.4F),
+                            (int)(alpha * 255 * 0.12f * hv)));
         }
 
-        RenderUtil.Rounded.roundedOutline(
-                matrix,
-                position.x + APPEND, position.y + APPEND,
-                size.x - (APPEND * 2F), size.y - (APPEND * 2F), 1, ColorUtil.multAlpha(InterFace.getInstance().themeColor(), 0.045F * alpha),
-                Round.of(4)
-        );
+        // обводка
+        int outlineAlpha = ColorUtil.multAlpha(themeColor, 0.045F * alpha);
+        RenderUtil.Rounded.roundedOutline(matrix, px, py, pw, ph, 1, outlineAlpha, Round.of(4));
 
-        // обводка цветом темы когда включён
-        if (module.isEnabled()) {
-            int enabledOutline = ColorUtil.multBright(InterFace.getInstance().themeColor(), 0.7F);
-            RenderUtil.Rounded.roundedOutline(
-                    matrix,
-                    position.x + APPEND, position.y + APPEND,
-                    size.x - (APPEND * 2F), size.y - (APPEND * 2F), 1,
-                    ColorUtil.multAlpha(enabledOutline, (float)(0.55F * alpha * module.getAnimation().get())),
-                    Round.of(4)
-            );
+        // свечение обводки когда включён
+        if (enabledVal > 0.01f) {
+            int enabledOutline = ColorUtil.multBright(themeColor, 0.7F);
+            RenderUtil.Rounded.roundedOutline(matrix, px, py, pw, ph, 1,
+                    ColorUtil.multAlpha(enabledOutline, 0.55F * alpha * enabledVal), Round.of(4));
+            // акцентная линия слева
+            RenderUtil.Rounded.smooth(matrix, px, py + 4, 2, ph - 8,
+                    ColorUtil.multAlpha(themeColor, 0.8F * alpha * enabledVal), Round.of(1));
+            RenderUtil.Shadow.drawShadow(matrix, px, py + 4, 2, ph - 8, 4,
+                    ColorUtil.replAlpha(themeColor, (int)(alpha * 255 * 0.3f * enabledVal)));
         }
 
-
-        int clientcolors = ColorUtil.overCol(ColorUtil.multAlpha(InterFace.getInstance().themeColor(), 0.035F * alpha), ColorUtil.multAlpha(InterFace.getInstance().themeColor(), alpha), module.getAnimation().get());
-        RenderUtil.Rounded.smooth(
-                matrix,
-                position.x + APPEND, position.y + APPEND,
-                size.x - (APPEND * 2F), size.y - (APPEND * 2F),
-                ColorUtil.multAlpha(clientcolors, 0.1F * alpha),
-                Round.of(4)
-        );
+        // градиентный фон при включении
+        int clientcolors = ColorUtil.overCol(
+                ColorUtil.multAlpha(themeColor, 0.035F * alpha),
+                ColorUtil.multAlpha(themeColor, alpha), enabledVal);
+        RenderUtil.Rounded.smooth(matrix, px, py, pw, ph,
+                ColorUtil.multAlpha(clientcolors, 0.12F * alpha),
+                ColorUtil.multAlpha(clientcolors, 0.12F * alpha),
+                ColorUtil.multAlpha(clientcolors, 0.06F * alpha),
+                ColorUtil.multAlpha(clientcolors, 0.06F * alpha),
+                Round.of(4));
 
 
         boolean noneMatch = panel().getCategoryComponents()
@@ -225,10 +232,14 @@ public class ModuleComponent extends WindowComponent {
         StencilUtil.enable();
         RectUtil.drawRect(matrix, position.x, position.y + size.y, size.x, expand * settingHeight, ColorUtil.getColor(128, 255));
         StencilUtil.read(1);
+        int settBgTop = ColorUtil.replAlpha(themeColor, 0.05F * alpha);
+        int settBgBot = ColorUtil.replAlpha(themeColor, 0.02F * alpha);
         RenderUtil.Rounded.smooth(matrix, position.x + 1F, position.y + size.y,
                 size.x - 2F, expand * (settingHeight),
-                ColorUtil.replAlpha(InterFace.getInstance().themeColor(), 0.04F * alpha), ColorUtil.replAlpha(InterFace.getInstance().themeColor(), 0.04F * alpha),
-                ColorUtil.replAlpha(InterFace.getInstance().themeColor(), 0.02F * alpha), ColorUtil.replAlpha(InterFace.getInstance().themeColor(), 0.02F * alpha), Round.of(4));
+                settBgTop, settBgTop, settBgBot, settBgBot, Round.of(4));
+        RenderUtil.Rounded.roundedOutline(matrix, position.x + 1F, position.y + size.y,
+                size.x - 2F, expand * (settingHeight), 0.5F,
+                ColorUtil.multAlpha(themeColor, 0.04F * alpha), Round.of(4));
 
 
         settingHeight = 0F;

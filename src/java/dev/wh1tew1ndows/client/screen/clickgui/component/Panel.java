@@ -158,23 +158,39 @@ public class Panel implements IScreen, IWindow {
         float a  = alpha.get();
         int  ai  = (int)(255 * a);
 
+        // ── тень/свечение вокруг GUI ──
+        RenderUtil.Shadow.drawShadow(matrix, gx, gy, GUI_W, GUI_H, 18,
+                ColorUtil.replAlpha(ColorUtil.getColor(0), (int)(ai * 0.6f)));
+        RenderUtil.Shadow.drawShadow(matrix, gx, gy, GUI_W, GUI_H, 8,
+                ColorUtil.replAlpha(ColorUtil.multDark(ColorUtil.fade(), 0.3F), (int)(ai * 0.25f)));
+
         // ── основной фон ──
         RenderUtil.Rounded.smooth(matrix, gx, gy, GUI_W, GUI_H,
                 ColorUtil.replAlpha(ColorUtil.getColor(14, 14, 18), ai), Round.of(8));
 
-        // ── левая панель ──
+        // ── левая панель с градиентом ──
         RenderUtil.Rounded.smooth(matrix, gx, gy, LEFT_W, GUI_H,
-                ColorUtil.replAlpha(ColorUtil.getColor(10, 10, 14), ai), Round.of(8, 8, 0, 0));
-        RenderUtil.Rounded.smooth(matrix, gx + LEFT_W, gy, 0.5F, GUI_H,
-                ColorUtil.replAlpha(ColorUtil.getColor(40, 40, 50), ai), Round.of(0));
+                ColorUtil.replAlpha(ColorUtil.getColor(12, 12, 16), ai),
+                ColorUtil.replAlpha(ColorUtil.getColor(12, 12, 16), ai),
+                ColorUtil.replAlpha(ColorUtil.getColor(8, 8, 12), ai),
+                ColorUtil.replAlpha(ColorUtil.getColor(8, 8, 12), ai),
+                Round.of(8, 8, 0, 0));
+        // разделитель с градиентом
+        int sepTop = ColorUtil.replAlpha(ColorUtil.multDark(ColorUtil.fade(), 0.25F), ai);
+        int sepBot = ColorUtil.replAlpha(ColorUtil.getColor(30, 30, 38), ai);
+        RenderUtil.Rounded.smooth(matrix, gx + LEFT_W, gy + 4, 0.5F, GUI_H - 8,
+                sepTop, sepTop, sepBot, sepBot, Round.of(0));
 
         drawLeftPanel(matrix, gx, gy, mouseX, mouseY, ai);
 
         // ── верхняя полоса ──
         RenderUtil.Rounded.smooth(matrix, gx + LEFT_W + 1, gy, GUI_W - LEFT_W - 1, TOP_H,
                 ColorUtil.replAlpha(ColorUtil.getColor(12, 12, 16), ai), Round.of(0, 8, 0, 0));
+        // акцентная линия под верхней полосой
+        int accentLeft = ColorUtil.replAlpha(ColorUtil.multDark(ColorUtil.fade(), 0.5F), (int)(ai * 0.6f));
+        int accentRight = ColorUtil.replAlpha(ColorUtil.getColor(30, 30, 38), (int)(ai * 0.3f));
         RenderUtil.Rounded.smooth(matrix, gx + LEFT_W + 1, gy + TOP_H, GUI_W - LEFT_W - 1, 0.5F,
-                ColorUtil.replAlpha(ColorUtil.getColor(40, 40, 50), ai), Round.of(0));
+                accentLeft, accentRight, accentRight, accentLeft, Round.of(0));
         drawBreadcrumbs(matrix, gx, gy, ai);
 
         // ── контент ──
@@ -184,9 +200,13 @@ public class Panel implements IScreen, IWindow {
         float contentH = GUI_H - TOP_H - 6;
         float colW = (contentW - 5f) / 2f;
 
-        // debug: убедимся что контентная область видна
+        // контентная область с лёгким градиентом
         RenderUtil.Rounded.smooth(matrix, contentX, contentY, contentW, contentH,
-                ColorUtil.replAlpha(ColorUtil.getColor(20, 20, 25), ai), Round.of(0));
+                ColorUtil.replAlpha(ColorUtil.getColor(18, 18, 22), ai),
+                ColorUtil.replAlpha(ColorUtil.getColor(18, 18, 22), ai),
+                ColorUtil.replAlpha(ColorUtil.getColor(16, 16, 20), ai),
+                ColorUtil.replAlpha(ColorUtil.getColor(16, 16, 20), ai),
+                Round.of(0));
 
         Scissor.push();
         Scissor.setFromComponentCoordinates(contentX - 1, contentY - 1, contentW + 2, contentH + 2);
@@ -212,6 +232,8 @@ public class Panel implements IScreen, IWindow {
         float logoSz = 22f;
         float logoX  = gx + 8;
         float logoY  = gy + 8;
+        RenderUtil.Shadow.drawShadow(ms, logoX, logoY, logoSz, logoSz, 6,
+                ColorUtil.replAlpha(ColorUtil.multDark(ColorUtil.fade(), 0.3F), (int)(ai * 0.3f)));
         RenderUtil.Rounded.smooth(ms, logoX, logoY, logoSz, logoSz,
                 ColorUtil.replAlpha(ColorUtil.getColor(14, 14, 18), ai), Round.of(5));
         // рисуем текстуру z_logo.png с прозрачностью 0.75
@@ -241,15 +263,23 @@ public class Panel implements IScreen, IWindow {
             float hv = (float) Math.min(1.0, catHoverAnims[i].get());
 
             if (sel) {
+                RenderUtil.Shadow.drawShadow(ms, gx + 4, cy, LEFT_W - 8, catH, 6,
+                        ColorUtil.replAlpha(ColorUtil.multDark(ColorUtil.fade(), 0.4F), (int)(ai * 0.3f)));
                 RenderUtil.Rounded.smooth(ms, gx + 4, cy, LEFT_W - 8, catH,
                         ColorUtil.replAlpha(ColorUtil.multDark(ColorUtil.fade(), 0.2F), ai), Round.of(5));
+                RenderUtil.Rounded.roundedOutline(ms, gx + 4, cy, LEFT_W - 8, catH, 0.5F,
+                        ColorUtil.replAlpha(ColorUtil.multDark(ColorUtil.fade(), 0.6F), (int)(ai * 0.4f)), Round.of(5));
                 RenderUtil.Rounded.smooth(ms, gx + 4, cy + 4, 3, catH - 8,
                         ColorUtil.replAlpha(ColorUtil.fade(), ai), Round.of(1.5F));
+                RenderUtil.Shadow.drawShadow(ms, gx + 4, cy + 4, 3, catH - 8, 4,
+                        ColorUtil.replAlpha(ColorUtil.fade(), (int)(ai * 0.4f)));
             } else if (hv > 0.01f) {
-                // цвет hover = тема с низкой прозрачностью
                 RenderUtil.Rounded.smooth(ms, gx + 4, cy, LEFT_W - 8, catH,
                         ColorUtil.replAlpha(ColorUtil.multDark(ColorUtil.fade(), 0.15F),
                                 (int)(ai * 0.5f * hv)), Round.of(5));
+                RenderUtil.Rounded.roundedOutline(ms, gx + 4, cy, LEFT_W - 8, catH, 0.5F,
+                        ColorUtil.replAlpha(ColorUtil.multDark(ColorUtil.fade(), 0.3F),
+                                (int)(ai * 0.2f * hv)), Round.of(5));
             }
 
             int iconCol = sel
@@ -273,13 +303,15 @@ public class Panel implements IScreen, IWindow {
         // поиск
         float searchY = gy + GUI_H - 42;
         boolean typing = clickGui.isSearchFieldSelected();
+        if (typing) {
+            RenderUtil.Shadow.drawShadow(ms, gx + 4, searchY, LEFT_W - 8, 14, 5,
+                    ColorUtil.replAlpha(ColorUtil.multDark(ColorUtil.fade(), 0.4F), (int)(ai * 0.25f)));
+        }
         RenderUtil.Rounded.smooth(ms, gx + 4, searchY, LEFT_W - 8, 14,
                 ColorUtil.replAlpha(ColorUtil.getColor(typing ? 20 : 15, typing ? 0.12F : 0.06F), ai), Round.of(4));
-        // обводка только когда активен поиск, иначе убираем
-        if (typing) {
-            RenderUtil.Rounded.roundedOutline(ms, gx + 4, searchY, LEFT_W - 8, 14, 0.5F,
-                    ColorUtil.replAlpha(ColorUtil.multDark(ColorUtil.fade(), 0.5F), ai), Round.of(4));
-        }
+        RenderUtil.Rounded.roundedOutline(ms, gx + 4, searchY, LEFT_W - 8, 14, 0.5F,
+                ColorUtil.replAlpha(ColorUtil.multDark(ColorUtil.fade(), typing ? 0.5F : 0.15F),
+                        (int)(ai * (typing ? 1.0f : 0.3f))), Round.of(4));
         String searchTxt = clickGui.isSearching()
                 ? clickGui.getSearchText() + (typing && System.currentTimeMillis() % 1000 > 500 ? "_" : "")
                 : (typing ? (System.currentTimeMillis() % 1000 > 500 ? "_" : "") : "Search");
@@ -294,10 +326,14 @@ public class Panel implements IScreen, IWindow {
         // тёмный фон блока профиля
         RenderUtil.Rounded.smooth(ms, gx + 4, profileY, LEFT_W - 8, 18,
                 ColorUtil.replAlpha(ColorUtil.getColor(18, 18, 22), ai), Round.of(4));
-        // тонкий тёмный разделитель над профилем
+        // градиентный разделитель над профилем
+        int profSepLeft = ColorUtil.replAlpha(ColorUtil.multDark(ColorUtil.fade(), 0.3F), ai);
+        int profSepRight = ColorUtil.replAlpha(ColorUtil.getColor(25, 25, 30), ai);
         RenderUtil.Rounded.smooth(ms, gx + 4, profileY - 1, LEFT_W - 8, 0.5F,
-                ColorUtil.replAlpha(ColorUtil.getColor(30, 30, 36), ai), Round.of(0));
-        // аватар — тёмный
+                profSepLeft, profSepRight, profSepRight, profSepLeft, Round.of(0));
+        // аватар с свечением
+        RenderUtil.Shadow.drawShadow(ms, gx + 7, profileY + 2, 14, 14, 4,
+                ColorUtil.replAlpha(ColorUtil.multDark(ColorUtil.fade(), 0.4F), (int)(ai * 0.25f)));
         RenderUtil.Rounded.smooth(ms, gx + 7, profileY + 2, 14, 14,
                 ColorUtil.replAlpha(ColorUtil.multDark(ColorUtil.fade(), 0.35F), ai), Round.of(3));
         Fonts.MONTSERRAT_BOLD.drawCenter(ms, String.valueOf(username.charAt(0)).toUpperCase(),
@@ -341,8 +377,10 @@ public class Panel implements IScreen, IWindow {
         RenderUtil.Rounded.smooth(ms, gx + GUI_W - 4, gy + TOP_H + 3, 2, contentH,
                 ColorUtil.replAlpha(ColorUtil.getColor(255, 0.06F), ai), Round.of(1));
         StencilUtil.read(1);
-        RenderUtil.Rounded.smooth(ms, gx + GUI_W - 4, barY, 2, barH,
-                ColorUtil.replAlpha(ColorUtil.multDark(ColorUtil.fade(), 0.7F), ai), Round.of(1));
+        int scrollCol = ColorUtil.replAlpha(ColorUtil.multDark(ColorUtil.fade(), 0.7F), ai);
+        RenderUtil.Shadow.drawShadow(ms, gx + GUI_W - 4, barY, 2, barH, 3,
+                ColorUtil.replAlpha(ColorUtil.multDark(ColorUtil.fade(), 0.4F), (int)(ai * 0.3f)));
+        RenderUtil.Rounded.smooth(ms, gx + GUI_W - 4, barY, 2, barH, scrollCol, Round.of(1));
         StencilUtil.disable();
     }
 
