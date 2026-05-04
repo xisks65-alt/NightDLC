@@ -28,7 +28,7 @@ public class ClickGuiModule extends Module {
     @EventHandler
     public void onKey(EventKeyboardMouse event) {
         if (event.getKey() == (getKey())) {
-            Minecraft.getInstance().displayScreen(Zetrix.inst().gui());
+            Minecraft.getInstance().displayScreen(Zetrix.inst().clickGui());
         }
     }
 }

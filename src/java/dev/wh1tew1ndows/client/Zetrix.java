@@ -8,6 +8,7 @@ import com.jagrosh.discordipc.exceptions.NoDiscordClientException;
 import dev.wh1tew1ndows.client.api.client.Constants;
 import dev.wh1tew1ndows.client.api.events.orbit.EventBus;
 import dev.wh1tew1ndows.client.gui.ClickGui;
+import dev.wh1tew1ndows.client.screen.clickgui.ClickGuiScreen;
 import dev.wh1tew1ndows.client.managers.alt.AltConfig;
 import dev.wh1tew1ndows.client.managers.alt.AltWidget;
 import dev.wh1tew1ndows.client.managers.command.AdviceCommandFactoryImpl;
@@ -99,6 +100,7 @@ public class Zetrix {
     private AltWidget altWidget;
     private WaveyCapesBase waveyCapes;
     private AltConfig altConfig;
+    private ClickGuiScreen clickGui;
     private ClickGui gui;
 
 
@@ -210,6 +212,7 @@ public class Zetrix {
     @NotNative
     private void initScreens() {
         this.gui = new ClickGui();
+        this.clickGui = new ClickGuiScreen();
         //  this.accountGui = new AccountGuiScreen();
     }
 
