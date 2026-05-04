@@ -1,0 +1,91 @@
+---- Minecraft Crash Report ----
+// Why did you do that?
+
+Time: 09.09.2025, 21:40
+Description: Exception generating new chunk
+
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at java.base/java.util.HashMap.computeIfAbsent(HashMap.java:1221)
+	at net.minecraft.world.gen.feature.template.TemplateManager.getTemplate(TemplateManager.java:52)
+	at net.minecraft.world.gen.feature.template.TemplateManager.getTemplateDefaulted(TemplateManager.java:40)
+	at net.minecraft.world.gen.feature.structure.OceanRuinPieces$Piece.setup(OceanRuinPieces.java:168)
+	at net.minecraft.world.gen.feature.structure.OceanRuinPieces$Piece.<init>(OceanRuinPieces.java:152)
+	at net.minecraft.world.gen.feature.structure.OceanRuinPieces.func_204045_a(OceanRuinPieces.java:121)
+	at net.minecraft.world.gen.feature.structure.OceanRuinPieces.func_204041_a(OceanRuinPieces.java:64)
+	at net.minecraft.world.gen.feature.structure.OceanRuinStructure$Start.func_230364_a_(OceanRuinStructure.java:38)
+	at net.minecraft.world.gen.feature.structure.OceanRuinStructure$Start.func_230364_a_(OceanRuinStructure.java:28)
+	at net.minecraft.world.gen.feature.structure.Structure.func_242785_a(Structure.java:235)
+	at net.minecraft.world.gen.feature.StructureFeature.func_242771_a(StructureFeature.java:37)
+	at net.minecraft.world.gen.ChunkGenerator.func_242705_a(ChunkGenerator.java:242)
+	at net.minecraft.world.gen.ChunkGenerator.func_242707_a(ChunkGenerator.java:232)
+	at net.minecraft.world.chunk.ChunkStatus.lambda$static$2(ChunkStatus.java:46)
+	at net.minecraft.world.chunk.ChunkStatus.doGenerationWork(ChunkStatus.java:218)
+
+-- Chunk to be generated --
+Details:
+	Location: 2,29
+	Position hash: 124554051586
+	Generator: net.minecraft.world.gen.NoiseChunkGenerator@567ec4a2
+Stacktrace:
+	at net.minecraft.world.server.ChunkManager.lambda$chunkGenerate$17(ChunkManager.java:549)
+	at com.mojang.datafixers.util.Either$Left.map(Either.java:38)
+	at net.minecraft.world.server.ChunkManager.lambda$chunkGenerate$19(ChunkManager.java:547)
+	at java.base/java.util.concurrent.CompletableFuture$UniCompose.tryFire(CompletableFuture.java:1150)
+	at java.base/java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:482)
+	at net.minecraft.world.chunk.ChunkTaskPriorityQueueSorter.lambda$func_219069_a$1(ChunkTaskPriorityQueueSorter.java:48)
+	at net.minecraft.util.concurrent.DelegatedTaskExecutor.driveOne(DelegatedTaskExecutor.java:120)
+	at net.minecraft.util.concurrent.DelegatedTaskExecutor.driveWhile(DelegatedTaskExecutor.java:180)
+	at net.minecraft.util.concurrent.DelegatedTaskExecutor.run(DelegatedTaskExecutor.java:136)
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1395)
+
+-- Affected level --
+Details:
+	All players: 1 total; [ServerPlayerEntity['HYt6ukt'/1, l='ServerLevel[New World]', x=-393.09, y=102.00, z=761.89]]
+	Chunk stats: ServerChunkCache: 2981
+	Level dimension: minecraft:overworld
+	Level spawn location: World: (-5,63,131), Chunk: (at 11,3,3 in -1,8; contains blocks -16,0,128 to -1,255,143), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,0,0 to -1,255,511)
+	Level time: 593713 game time, 426955 day time
+	Level name: New World
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: true
+	Level weather: Rain time: 39451 (now: false), thunder time: 8481 (now: false)
+	Known server brands: vanilla
+	Level was modded: true
+	Level storage version: 0x04ABD - Anvil
+Stacktrace:
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:827)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:780)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:92)
+	at net.minecraft.server.MinecraftServer.func_240802_v_(MinecraftServer.java:633)
+	at net.minecraft.server.MinecraftServer.lambda$func_240784_a_$0(MinecraftServer.java:224)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.16.5
+	Minecraft Version ID: 1.16.5
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 17.0.15, Amazon.com Inc.
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Amazon.com Inc.
+	Memory: 195227784 bytes (186 MB) / 1145044992 bytes (1092 MB) up to 8556380160 bytes (8160 MB)
+	CPUs: 16
+	JVM Flags: 0 total; 
+	Player Count: 1 / 8; [ServerPlayerEntity['HYt6ukt'/1, l='ServerLevel[New World]', x=-393.09, y=102.00, z=761.89]]
+	Data Packs: vanilla
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Very likely; Jar signature invalidated
+	OptiFine Version: OptiFine_1.16.5_HD_U_G8
+	OptiFine Build: ~~NULL~~
+	Render Distance Chunks: 8
+	Mipmaps: 4
+	Anisotropic Filtering: 1
+	Antialiasing: 0
+	Multitexture: false
+	Shaders: ~~NULL~~
+	OpenGlVersion: 4.6.0 NVIDIA 581.08
+	OpenGlRenderer: NVIDIA GeForce RTX 3060/PCIe/SSE2
+	OpenGlVendor: NVIDIA Corporation
+	CpuCount: 16

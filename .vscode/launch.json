@@ -1,0 +1,12 @@
+﻿{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node-terminal",
+            "name": "Zetrix.cc (Minecraft)",
+            "request": "launch",
+            "command": "cmd /c \"java -Djava.library.path=workspace/natives -Xmx2G -Xms512m -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -cp out/production/Zetrix.cc;out/production/night-src;out/production/excellent-client;workspace/client-libs/*;workspace/client-libs/javafx/*;workspace/libraries/* Start\"",
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

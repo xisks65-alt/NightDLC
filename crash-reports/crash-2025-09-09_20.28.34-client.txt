@@ -1,0 +1,72 @@
+---- Minecraft Crash Report ----
+// Uh... Did I do that?
+
+Time: 09.09.2025, 20:28
+Description: Rendering screen
+
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at dev.wh1tew1ndows.client.utils.render.font.normal.NormalFont.lambda$get$0(NormalFont.java:31)
+	at it.unimi.dsi.fastutil.floats.Float2ObjectMap.computeIfAbsent(Float2ObjectMap.java:383)
+	at dev.wh1tew1ndows.client.utils.render.font.normal.NormalFont.get(NormalFont.java:27)
+	at dev.wh1tew1ndows.client.screen.clickgui.component.theme.GuiRenderTheme.renderTheme(GuiRenderTheme.java:37)
+	at dev.wh1tew1ndows.client.screen.clickgui.ClickGuiScreen.render(ClickGuiScreen.java:109)
+
+-- Screen render details --
+Details:
+	Screen name: dev.wh1tew1ndows.client.screen.clickgui.ClickGuiScreen
+	Mouse location: Scaled: (480, 254). Absolute: (960.000000, 508.500000)
+	Screen size: Scaled: (960, 509). Absolute: (1920, 1017). Scale factor of 2.000000
+
+-- Affected level --
+Details:
+	All players: 1 total; [ClientPlayerEntity['HYt6ukt'/1, l='ClientLevel', x=-383.47, y=98.00, z=765.04]]
+	Chunk stats: Client Chunk Cache: 441, 0
+	Level dimension: minecraft:overworld
+	Level spawn location: World: (-5,63,131), Chunk: (at 11,3,3 in -1,8; contains blocks -16,0,128 to -1,255,143), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,0,0 to -1,255,511)
+	Level time: 33 game time, 16000 day time
+	Server brand: vanilla
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.world.ClientWorld.fillCrashReport(ClientWorld.java:529)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:1858)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:537)
+	at net.minecraft.client.main.Main.main(Main.java:194)
+	at Start.main(Start.java:17)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.16.5
+	Minecraft Version ID: 1.16.5
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 17.0.15, Amazon.com Inc.
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Amazon.com Inc.
+	Memory: 260740984 bytes (248 MB) / 1241513984 bytes (1184 MB) up to 8556380160 bytes (8160 MB)
+	CPUs: 16
+	JVM Flags: 0 total; 
+	Launched Version: mcp
+	Backend library: LWJGL version 3.2.2 build 10
+	Backend API: NVIDIA GeForce RTX 3060/PCIe/SSE2 GL version 4.6.0 NVIDIA 581.08, NVIDIA Corporation
+	GL Caps: Using framebuffer using OpenGL 3.0
+	Using VBOs: Yes
+	Is Modded: Very likely; Jar signature invalidated
+	Type: Client (map_client.txt)
+	Graphics mode: fast
+	Resource Packs: vanilla, file/Pack
+	Current Language: English (US)
+	CPU: 16x AMD Ryzen 7 5700G with Radeon Graphics 
+	OptiFine Version: OptiFine_1.16.5_HD_U_G8
+	OptiFine Build: ~~NULL~~
+	Render Distance Chunks: 8
+	Mipmaps: 4
+	Anisotropic Filtering: 1
+	Antialiasing: 0
+	Multitexture: false
+	Shaders: ~~NULL~~
+	OpenGlVersion: 4.6.0 NVIDIA 581.08
+	OpenGlRenderer: NVIDIA GeForce RTX 3060/PCIe/SSE2
+	OpenGlVendor: NVIDIA Corporation
+	CpuCount: 16

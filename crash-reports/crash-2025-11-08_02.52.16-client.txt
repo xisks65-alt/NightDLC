@@ -1,0 +1,75 @@
+---- Minecraft Crash Report ----
+// There are four lights!
+
+Time: 08.11.2025, 02:52
+Description: Rendering screen
+
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at dev.wh1tew1ndows.client.utils.render.shader.ShaderManager.setUniform(ShaderManager.java:137)
+	at dev.wh1tew1ndows.client.screen.glowUtil.BloomHelper.draw(BloomHelper.java:59)
+	at dev.wh1tew1ndows.client.screen.clickgui.component.category.CategoryComponent.render(CategoryComponent.java:93)
+	at dev.wh1tew1ndows.client.screen.clickgui.component.Panel.renderComponents(Panel.java:168)
+	at dev.wh1tew1ndows.client.screen.clickgui.component.Panel.render(Panel.java:153)
+	at dev.wh1tew1ndows.client.screen.clickgui.ClickGuiScreen.drawPanel(ClickGuiScreen.java:134)
+	at dev.wh1tew1ndows.client.screen.clickgui.ClickGuiScreen.draw(ClickGuiScreen.java:101)
+	at dev.wh1tew1ndows.client.screen.clickgui.ClickGuiScreen.render(ClickGuiScreen.java:84)
+
+-- Screen render details --
+Details:
+	Screen name: dev.wh1tew1ndows.client.screen.clickgui.ClickGuiScreen
+	Mouse location: Scaled: (480, 254). Absolute: (960.000000, 508.500000)
+	Screen size: Scaled: (960, 509). Absolute: (1920, 1017). Scale factor of 2.000000
+
+-- Affected level --
+Details:
+	All players: 1 total; [ClientPlayerEntity['uqSRQM0'/1, l='ClientLevel', x=525.72, y=70.00, z=16585.58]]
+	Chunk stats: Client Chunk Cache: 441, 255
+	Level dimension: minecraft:overworld
+	Level spawn location: World: (97,78,23505), Chunk: (at 1,4,1 in 6,1469; contains blocks 96,0,23504 to 111,255,23519), Region: (0,45; contains chunks 0,1440 to 31,1471, blocks 0,0,23040 to 511,255,23551)
+	Level time: 1466 game time, 16000 day time
+	Server brand: vanilla
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.world.ClientWorld.fillCrashReport(ClientWorld.java:529)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:1859)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:538)
+	at net.minecraft.client.main.Main.main(Main.java:194)
+	at Start.main(Start.java:47)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.16.5
+	Minecraft Version ID: 1.16.5
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 17.0.15, Amazon.com Inc.
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Amazon.com Inc.
+	Memory: 365757328 bytes (348 MB) / 884998144 bytes (844 MB) up to 8556380160 bytes (8160 MB)
+	CPUs: 16
+	JVM Flags: 0 total; 
+	Launched Version: mcp
+	Backend library: LWJGL version 3.2.2 build 10
+	Backend API: NVIDIA GeForce RTX 3060/PCIe/SSE2 GL version 4.6.0 NVIDIA 581.29, NVIDIA Corporation
+	GL Caps: Using framebuffer using OpenGL 3.0
+	Using VBOs: Yes
+	Is Modded: Very likely; Jar signature invalidated
+	Type: Client (map_client.txt)
+	Graphics mode: fast
+	Resource Packs: vanilla
+	Current Language: Русский (Россия)
+	CPU: 16x AMD Ryzen 7 5700G with Radeon Graphics 
+	OptiFine Version: OptiFine_1.16.5_HD_U_G8
+	OptiFine Build: ~~NULL~~
+	Render Distance Chunks: 8
+	Mipmaps: 4
+	Anisotropic Filtering: 1
+	Antialiasing: 0
+	Multitexture: false
+	Shaders: ~~NULL~~
+	OpenGlVersion: 4.6.0 NVIDIA 581.29
+	OpenGlRenderer: NVIDIA GeForce RTX 3060/PCIe/SSE2
+	OpenGlVendor: NVIDIA Corporation
+	CpuCount: 16

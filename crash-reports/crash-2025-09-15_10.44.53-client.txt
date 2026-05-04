@@ -1,0 +1,91 @@
+---- Minecraft Crash Report ----
+// Who set us up the TNT?
+
+Time: 15.09.2025, 10:44
+Description: Rendering entity in world
+
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at java.base/java.util.Random.nextInt(Random.java:322)
+	at net.minecraft.client.renderer.entity.model.PlayerModel.getRandomModelRenderer(PlayerModel.java:513)
+	at net.minecraft.client.renderer.entity.layers.StuckInBodyLayer.render(StuckInBodyLayer.java:34)
+	at net.minecraft.client.renderer.entity.layers.StuckInBodyLayer.render(StuckInBodyLayer.java:13)
+	at net.minecraft.client.renderer.entity.LivingRenderer.render(LivingRenderer.java:189)
+	at net.minecraft.client.renderer.entity.PlayerRenderer.render(PlayerRenderer.java:57)
+	at net.minecraft.client.renderer.entity.PlayerRenderer.render(PlayerRenderer.java:36)
+
+-- Entity being rendered --
+Details:
+	Entity Type: minecraft:player (net.minecraft.client.entity.player.RemoteClientPlayerEntity)
+	Entity ID: 42989
+	Entity Name: xpqadrg
+	Entity's Exact location: -14.25, 56.17, 86.36
+	Entity's Block location: World: (-15,56,86), Chunk: (at 1,3,6 in -1,5; contains blocks -16,0,80 to -1,255,95), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,0,0 to -1,255,511)
+	Entity's Momentum: 0.00, 0.00, 0.00
+	Entity's Passengers: []
+	Entity's Vehicle: ~~ERROR~~ NullPointerException: Cannot invoke "net.minecraft.entity.Entity.toString()" because the return value of "net.minecraft.entity.Entity.getRidingEntity()" is null
+
+-- Renderer details --
+Details:
+	Assigned renderer: net.minecraft.client.renderer.entity.PlayerRenderer@1b76cbe2
+	Location: 5.25,-33.49,47.69 - World: (5,-34,47), Chunk: (at 5,-3,15 in 0,2; contains blocks 0,0,32 to 15,255,47), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+	Rotation: 177.1875
+	Delta: 0.19909579
+Stacktrace:
+	at net.minecraft.client.renderer.entity.EntityRendererManager.renderEntityStatic(EntityRendererManager.java:321)
+	at net.minecraft.client.renderer.WorldRenderer.renderEntity(WorldRenderer.java:1674)
+	at net.minecraft.client.renderer.WorldRenderer.updateCameraAndRender(WorldRenderer.java:1340)
+	at net.minecraft.client.renderer.GameRenderer.renderWorld(GameRenderer.java:888)
+
+-- Affected level --
+Details:
+	All players: 10 total; [ClientPlayerEntity['aFvMfo3'/44586, l='ClientLevel', x=-19.49, y=88.17, z=38.82], RemoteClientPlayerEntity['warchik'/37565, l='ClientLevel', x=-21.81, y=87.00, z=34.05], RemoteClientPlayerEntity['[ZNPC] 451573'/2099, l='ClientLevel', x=-7.50, y=87.00, z=15.50], RemoteClientPlayerEntity['[ZNPC] 428651'/2104, l='ClientLevel', x=-25.50, y=87.00, z=40.50], RemoteClientPlayerEntity['[ZNPC] 554812'/2109, l='ClientLevel', x=-26.50, y=66.00, z=34.50], RemoteClientPlayerEntity['[ZNPC] 317672'/2112, l='ClientLevel', x=-26.50, y=66.00, z=36.50], RemoteClientPlayerEntity['ImpulseNeverdies'/39877, l='ClientLevel', x=24.45, y=87.00, z=8.62], RemoteClientPlayerEntity['[ZNPC] 242740'/2115, l='ClientLevel', x=-42.50, y=98.00, z=51.50], RemoteClientPlayerEntity['I_InvisKa'/37072, l='ClientLevel', x=-14.70, y=56.18, z=85.30], RemoteClientPlayerEntity['xpqadrg'/42989, l='ClientLevel', x=-14.25, y=56.17, z=86.36]]
+	Chunk stats: Client Chunk Cache: 361, 225
+	Level dimension: minecraft:world
+	Level spawn location: World: (5,87,15), Chunk: (at 5,5,15 in 0,0; contains blocks 0,0,0 to 15,255,15), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+	Level time: 140 game time, 16000 day time
+	Server brand: Space Times <- §5§lsᴘᴀᴄᴇ ᴛɪᴍᴇs§r
+	Server type: Non-integrated multiplayer server
+Stacktrace:
+	at net.minecraft.client.world.ClientWorld.fillCrashReport(ClientWorld.java:529)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:1859)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:538)
+	at net.minecraft.client.main.Main.main(Main.java:194)
+	at Start.main(Start.java:17)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.16.5
+	Minecraft Version ID: 1.16.5
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 17.0.15, Amazon.com Inc.
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Amazon.com Inc.
+	Memory: 97704592 bytes (93 MB) / 616562688 bytes (588 MB) up to 8556380160 bytes (8160 MB)
+	CPUs: 16
+	JVM Flags: 0 total; 
+	Launched Version: mcp
+	Backend library: LWJGL version 3.2.2 build 10
+	Backend API: NVIDIA GeForce RTX 3060/PCIe/SSE2 GL version 4.6.0 NVIDIA 581.08, NVIDIA Corporation
+	GL Caps: Using framebuffer using OpenGL 3.0
+	Using VBOs: Yes
+	Is Modded: Very likely; Jar signature invalidated
+	Type: Client (map_client.txt)
+	Graphics mode: fast
+	Resource Packs: vanilla, file/§b§ltgk - @podvalsn1wers 1029.zip (incompatible)
+	Current Language: Русский (Россия)
+	CPU: 16x AMD Ryzen 7 5700G with Radeon Graphics 
+	OptiFine Version: OptiFine_1.16.5_HD_U_G8
+	OptiFine Build: ~~NULL~~
+	Render Distance Chunks: 8
+	Mipmaps: 4
+	Anisotropic Filtering: 1
+	Antialiasing: 0
+	Multitexture: false
+	Shaders: ~~NULL~~
+	OpenGlVersion: 4.6.0 NVIDIA 581.08
+	OpenGlRenderer: NVIDIA GeForce RTX 3060/PCIe/SSE2
+	OpenGlVendor: NVIDIA Corporation
+	CpuCount: 16

@@ -1,0 +1,74 @@
+---- Minecraft Crash Report ----
+// Don't be sad, have a hug! <3
+
+Time: 26.04.2026, 19:46
+Description: Rendering screen
+
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at dev.wh1tew1ndows.client.screen.clickgui.component.setting.impl.ModeSettingComponent.render(ModeSettingComponent.java:54)
+	at dev.wh1tew1ndows.client.screen.clickgui.component.module.ModuleComponent.render(ModuleComponent.java:241)
+	at dev.wh1tew1ndows.client.screen.clickgui.component.category.CategoryComponent.render(CategoryComponent.java:73)
+	at dev.wh1tew1ndows.client.screen.clickgui.component.Panel.render(Panel.java:199)
+	at dev.wh1tew1ndows.client.screen.clickgui.ClickGuiScreen.drawPanel(ClickGuiScreen.java:136)
+	at dev.wh1tew1ndows.client.screen.clickgui.ClickGuiScreen.draw(ClickGuiScreen.java:101)
+	at dev.wh1tew1ndows.client.screen.clickgui.ClickGuiScreen.render(ClickGuiScreen.java:84)
+
+-- Screen render details --
+Details:
+	Screen name: dev.wh1tew1ndows.client.screen.clickgui.ClickGuiScreen
+	Mouse location: Scaled: (449, 208). Absolute: (898.000000, 416.000000)
+	Screen size: Scaled: (960, 540). Absolute: (1920, 1080). Scale factor of 2.000000
+
+-- Affected level --
+Details:
+	All players: 64 total; [ClientPlayerEntity['PDvdQc7'/5554895, l='ClientLevel', x=-0.24, y=87.00, z=17.67], RemoteClientPlayerEntity['§8-521'/-521, l='ClientLevel', x=-2.50, y=90.00, z=6.50], RemoteClientPlayerEntity['§8-524'/-524, l='ClientLevel', x=5.50, y=90.00, z=5.50], RemoteClientPlayerEntity['§8-532'/-532, l='ClientLevel', x=-4.50, y=88.00, z=47.50], RemoteClientPlayerEntity['§8-541'/-541, l='ClientLevel', x=-27.50, y=96.00, z=52.50], RemoteClientPlayerEntity['§8-553'/-553, l='ClientLevel', x=3.50, y=76.00, z=39.50], RemoteClientPlayerEntity['§8-587'/-587, l='ClientLevel', x=33.50, y=87.00, z=11.50], RemoteClientPlayerEntity['§8-596'/-596, l='ClientLevel', x=25.50, y=87.00, z=11.50], RemoteClientPlayerEntity['§8-599'/-599, l='ClientLevel', x=17.50, y=87.00, z=55.50], RemoteClientPlayerEntity['§8-605'/-605, l='ClientLevel', x=17.50, y=87.00, z=11.50], RemoteClientPlayerEntity['IIIIIIQS'/4871904, l='ClientLevel', x=-23.19, y=88.00, z=27.56], RemoteClientPlayerEntity['AAAEESSQ'/5197236, l='ClientLevel', x=-26.04, y=88.00, z=29.02], RemoteClientPlayerEntity['MrSprutel11'/5372849, l='ClientLevel', x=-27.19, y=89.38, z=28.91], RemoteClientPlayerEntity['SleppMC'/4270061, l='ClientLevel', x=-19.82, y=87.50, z=23.29], RemoteClientPlayerEntity['momolev'/4843060, l='ClientLevel', x=-16.46, y=88.81, z=27.41], RemoteClientPlayerEntity['Yariknew'/5386872, l='ClientLevel', x=-4.06, y=90.50, z=-4.85], RemoteClientPlayerEntity['San1kssz'/4965400, l='ClientLevel', x=-2.37, y=90.00, z=5.39], RemoteClientPlayerEntity['dudal_duldon'/4857719, l='ClientLevel', x=-8.24, y=87.00, z=11.30], RemoteClientPlayerEntity['TT_Sunsetik'/5395020, l='ClientLevel', x=-0.50, y=90.00, z=1.37], RemoteClientPlayerEntity['Artem653'/5549865, l='ClientLevel', x=-1.80, y=87.00, z=16.53], RemoteClientPlayerEntity['vovan4ik_228'/3981453, l='ClientLevel', x=-3.45, y=88.00, z=45.45], RemoteClientPlayerEntity['Melan'/5451328, l='ClientLevel', x=-10.13, y=106.00, z=43.69], RemoteClientPlayerEntity['teploy_moloko'/3950731, l='ClientLevel', x=1.42, y=76.00, z=29.88], RemoteClientPlayerEntity['_FireStar_'/3369287, l='ClientLevel', x=5.65, y=87.00, z=29.46], RemoteClientPlayerEntity['dovud6768'/5274164, l='ClientLevel', x=-34.50, y=88.00, z=27.61], RemoteClientPlayerEntity['PE1EMEN4IK'/5503107, l='ClientLevel', x=-43.76, y=87.39, z=27.95], RemoteClientPlayerEntity['ambrosov'/5004039, l='ClientLevel', x=-31.12, y=88.00, z=24.82], RemoteClientPlayerEntity['ximaerwa2'/4570724, l='ClientLevel', x=-23.15, y=87.00, z=15.51], RemoteClientPlayerEntity['MM5665'/5156975, l='ClientLevel', x=-28.70, y=96.00, z=34.24], RemoteClientPlayerEntity['citer_777'/4524754, l='ClientLevel', x=14.47, y=88.00, z=10.30], RemoteClientPlayerEntity['vghgv'/5328969, l='ClientLevel', x=6.87, y=90.00, z=3.46], RemoteClientPlayerEntity['spookycr'/5544868, l='ClientLevel', x=13.83, y=87.00, z=15.46], RemoteClientPlayerEntity['COCY_3A_5TENGE'/4375055, l='ClientLevel', x=4.78, y=87.00, z=40.65], RemoteClientPlayerEntity['dgdhdd'/5459907, l='ClientLevel', x=-3.35, y=90.03, z=-6.70], RemoteClientPlayerEntity['ANDRE_2024EGYPT'/5395280, l='ClientLevel', x=-44.09, y=87.00, z=12.90], RemoteClientPlayerEntity['spaschari'/2320187, l='ClientLevel', x=-22.68, y=87.00, z=15.16], RemoteClientPlayerEntity['gospod_288'/4456019, l='ClientLevel', x=-30.59, y=88.12, z=18.25], RemoteClientPlayerEntity['Tdxvoid'/4811914, l='ClientLevel', x=5.69, y=91.50, z=-6.16], RemoteClientPlayerEntity['gojosatorupisya'/4238934, l='ClientLevel', x=10.06, y=88.00, z=59.52], RemoteClientPlayerEntity['athetanya31'/4643478, l='ClientLevel', x=27.19, y=87.00, z=14.89], RemoteClientPlayerEntity['romin_amq'/4607936, l='ClientLevel', x=43.96, y=88.13, z=10.02], RemoteClientPlayerEntity['DragonloveD'/5536263, l='ClientLevel', x=-32.96, y=88.00, z=26.57], RemoteClientPlayerEntity['§8-514'/-514, l='ClientLevel', x=0.50, y=90.00, z=6.50], RemoteClientPlayerEntity['§8-518'/-518, l='ClientLevel', x=3.50, y=90.00, z=6.50], RemoteClientPlayerEntity['sfek'/5215109, l='ClientLevel', x=-0.77, y=98.24, z=43.71], RemoteClientPlayerEntity['Mr_The_low'/5551959, l='ClientLevel', x=1.76, y=90.00, z=0.63], RemoteClientPlayerEntity['MaxBrat'/5560266, l='ClientLevel', x=-5.38, y=87.00, z=18.01], RemoteClientPlayerEntity['bro9i_67_67_rrr'/4941234, l='ClientLevel', x=-23.64, y=87.00, z=11.76], RemoteClientPlayerEntity['cleartouch'/5563288, l='ClientLevel', x=-40.57, y=87.00, z=10.39], RemoteClientPlayerEntity['414_veg_77'/5563421, l='ClientLevel', x=-26.50, y=87.00, z=19.50], RemoteClientPlayerEntity['pigorr'/5563442, l='ClientLevel', x=-35.99, y=87.50, z=23.14], RemoteClientPlayerEntity['krutoibratan4259'/5205850, l='ClientLevel', x=-17.27, y=88.00, z=25.70], RemoteClientPlayerEntity['Denis1188'/5286445, l='ClientLevel', x=-12.36, y=87.00, z=13.16], RemoteClientPlayerEntity['misha89PRO167'/2163191, l='ClientLevel', x=6.03, y=89.50, z=10.74], RemoteClientPlayerEntity['§8-578'/-578, l='ClientLevel', x=45.50, y=87.00, z=17.50], RemoteClientPlayerEntity['wsdsadsda'/5567399, l='ClientLevel', x=-33.66, y=87.00, z=18.94], RemoteClientPlayerEntity['Wh1teEye'/5567719, l='ClientLevel', x=-37.91, y=87.00, z=14.87], RemoteClientPlayerEntity['§8-584'/-584, l='ClientLevel', x=25.50, y=87.00, z=55.50], RemoteClientPlayerEntity['flokok'/5568081, l='ClientLevel', x=11.92, y=87.00, z=13.95], RemoteClientPlayerEntity['§8-581'/-581, l='ClientLevel', x=45.50, y=87.00, z=25.50], RemoteClientPlayerEntity['Gold72Rush'/5569112, l='ClientLevel', x=14.11, y=92.54, z=35.69], RemoteClientPlayerEntity['BOBA_865'/5248709, l='ClientLevel', x=-1.51, y=90.00, z=5.84], RemoteClientPlayerEntity['Golimeni'/5112948, l='ClientLevel', x=-2.20, y=90.00, z=4.07], RemoteClientPlayerEntity['bratan7896'/5570733, l='ClientLevel', x=-5.70, y=87.50, z=11.52]]
+	Chunk stats: Client Chunk Cache: 441, 289
+	Level dimension: minecraft:spawn
+	Level spawn location: World: (7,87,6), Chunk: (at 7,5,6 in 0,0; contains blocks 0,0,0 to 15,255,15), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+	Level time: 164836 game time, 67 day time
+	Server brand: §6Spooky§cTime.net <- §6Spooky§cCore 1.16.5
+	Server type: Non-integrated multiplayer server
+Stacktrace:
+	at net.minecraft.client.world.ClientWorld.fillCrashReport(ClientWorld.java:529)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:1874)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:548)
+	at net.minecraft.client.main.Main.main(Main.java:199)
+	at Start.main(Start.java:47)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.16.5
+	Minecraft Version ID: 1.16.5
+	Operating System: Windows 11 (amd64) version 10.0
+	Java Version: 21.0.10, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
+	Memory: 228624472 bytes (218 MB) / 743440384 bytes (709 MB) up to 2147483648 bytes (2048 MB)
+	CPUs: 12
+	JVM Flags: 4 total; -Xmx2G -Xms512m -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC
+	Launched Version: mcp
+	Backend library: LWJGL version 3.2.2 build 10
+	Backend API: NVIDIA GeForce RTX 3080/PCIe/SSE2 GL version 4.6.0 NVIDIA 595.97, NVIDIA Corporation
+	GL Caps: Using framebuffer using OpenGL 3.0
+	Using VBOs: Yes
+	Is Modded: Very likely; Jar signature invalidated
+	Type: Client (map_client.txt)
+	Graphics mode: fast
+	Resource Packs: vanilla, file/§b§ltgk - @podvalsn1wers 1074.zip (incompatible)
+	Current Language: English (US)
+	CPU: 12x AMD Ryzen 5 5600 6-Core Processor 
+	OptiFine Version: OptiFine_1.16.5_HD_U_G8
+	OptiFine Build: ~~NULL~~
+	Render Distance Chunks: 8
+	Mipmaps: 4
+	Anisotropic Filtering: 1
+	Antialiasing: 0
+	Multitexture: false
+	Shaders: ~~NULL~~
+	OpenGlVersion: 4.6.0 NVIDIA 595.97
+	OpenGlRenderer: NVIDIA GeForce RTX 3080/PCIe/SSE2
+	OpenGlVendor: NVIDIA Corporation
+	CpuCount: 12

@@ -1,0 +1,66 @@
+---- Minecraft Crash Report ----
+// My bad.
+
+Time: 26.04.2026, 18:44
+Description: Unexpected error
+
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at dev.wh1tew1ndows.client.managers.module.impl.combat.AttackAura.updateNeuro(AttackAura.java:290)
+	at dev.wh1tew1ndows.client.managers.module.impl.combat.AttackAura.updateRotation(AttackAura.java:196)
+	at dev.wh1tew1ndows.client.managers.module.impl.combat.AttackAura.onGameUpdate(AttackAura.java:154)
+	at dev.wh1tew1ndows.client.api.events.orbit.listeners.LambdaListener.call(LambdaListener.java:76)
+	at dev.wh1tew1ndows.client.api.events.orbit.EventBus.post(EventBus.java:124)
+
+-- Affected level --
+Details:
+	All players: 53 total; [ClientPlayerEntity['PDvdQc7'/4961994, l='ClientLevel', x=-1.00, y=87.00, z=14.01], RemoteClientPlayerEntity['smeduwghbhe2011'/4858773, l='ClientLevel', x=-10.17, y=91.50, z=9.80], RemoteClientPlayerEntity['dudal_duldon'/4857719, l='ClientLevel', x=-8.24, y=87.00, z=11.30], RemoteClientPlayerEntity['HistoryMyName'/4735710, l='ClientLevel', x=-16.20, y=87.00, z=14.01], RemoteClientPlayerEntity['ebalkina'/4933966, l='ClientLevel', x=-2.40, y=90.00, z=0.36], RemoteClientPlayerEntity['solomka_travka'/4315097, l='ClientLevel', x=-14.45, y=88.00, z=9.62], RemoteClientPlayerEntity['tapak12'/4788401, l='ClientLevel', x=-23.70, y=87.00, z=15.27], RemoteClientPlayerEntity['§8-514'/-514, l='ClientLevel', x=0.50, y=90.00, z=6.50], RemoteClientPlayerEntity['§8-518'/-518, l='ClientLevel', x=3.50, y=90.00, z=6.50], RemoteClientPlayerEntity['§8-521'/-521, l='ClientLevel', x=-2.50, y=90.00, z=6.50], RemoteClientPlayerEntity['§8-524'/-524, l='ClientLevel', x=5.50, y=90.00, z=5.50], RemoteClientPlayerEntity['§8-532'/-532, l='ClientLevel', x=-4.50, y=88.00, z=47.50], RemoteClientPlayerEntity['§8-553'/-553, l='ClientLevel', x=3.50, y=76.00, z=39.50], RemoteClientPlayerEntity['§8-587'/-587, l='ClientLevel', x=33.50, y=87.00, z=11.50], RemoteClientPlayerEntity['§8-596'/-596, l='ClientLevel', x=25.50, y=87.00, z=11.50], RemoteClientPlayerEntity['§8-605'/-605, l='ClientLevel', x=17.50, y=87.00, z=11.50], RemoteClientPlayerEntity['Donald_N3'/4353769, l='ClientLevel', x=-1.96, y=90.00, z=-2.90], RemoteClientPlayerEntity['TERPO_13'/4944716, l='ClientLevel', x=-0.04, y=87.00, z=41.72], RemoteClientPlayerEntity['gopnik54213'/4702936, l='ClientLevel', x=-14.51, y=88.01, z=29.92], RemoteClientPlayerEntity['citer_777'/4524754, l='ClientLevel', x=14.47, y=88.00, z=10.30], RemoteClientPlayerEntity['252510'/4957024, l='ClientLevel', x=1.48, y=87.00, z=12.96], RemoteClientPlayerEntity['Surrorter'/4932817, l='ClientLevel', x=5.02, y=87.00, z=14.82], RemoteClientPlayerEntity['ISBD'/4858554, l='ClientLevel', x=2.49, y=87.00, z=32.55], RemoteClientPlayerEntity['Senpaimx'/2839751, l='ClientLevel', x=-23.07, y=87.00, z=20.42], RemoteClientPlayerEntity['gospod_288'/4456019, l='ClientLevel', x=-17.61, y=87.00, z=17.49], RemoteClientPlayerEntity['dhdhdbdbbx'/4714647, l='ClientLevel', x=-31.32, y=87.00, z=18.01], RemoteClientPlayerEntity['IIIIIIQS'/4871904, l='ClientLevel', x=-23.65, y=88.00, z=29.97], RemoteClientPlayerEntity['flo1tic'/4948186, l='ClientLevel', x=-15.48, y=88.00, z=26.40], RemoteClientPlayerEntity['kros_vok333'/4901689, l='ClientLevel', x=-35.63, y=89.00, z=28.43], RemoteClientPlayerEntity['danilkichddd'/4905291, l='ClientLevel', x=1.75, y=76.00, z=39.50], RemoteClientPlayerEntity['Tdxvoid'/4811914, l='ClientLevel', x=5.69, y=91.50, z=-6.16], RemoteClientPlayerEntity['teploy_moloko'/3950731, l='ClientLevel', x=1.42, y=76.00, z=29.88], RemoteClientPlayerEntity['COCY_3A_5TENGE'/4375055, l='ClientLevel', x=-49.00, y=87.00, z=14.55], RemoteClientPlayerEntity['ximaerwa2'/4570724, l='ClientLevel', x=-39.69, y=87.00, z=21.70], RemoteClientPlayerEntity['karotegEjeshIe'/4876370, l='ClientLevel', x=-36.36, y=87.50, z=25.94], RemoteClientPlayerEntity['z_RoUdi2000'/4337256, l='ClientLevel', x=-32.31, y=88.00, z=30.38], RemoteClientPlayerEntity['Dobrik1234'/4846056, l='ClientLevel', x=-33.22, y=87.00, z=19.99], RemoteClientPlayerEntity['damboh123'/4900240, l='ClientLevel', x=-32.75, y=88.81, z=27.09], RemoteClientPlayerEntity['bro9i_67_67_rrr'/4941234, l='ClientLevel', x=-16.12, y=87.00, z=20.93], RemoteClientPlayerEntity['pusun1234'/4282416, l='ClientLevel', x=-6.85, y=87.00, z=-32.75], RemoteClientPlayerEntity['_RainWars_'/4382743, l='ClientLevel', x=3.35, y=90.13, z=-23.85], RemoteClientPlayerEntity['_RabbitDeD_'/4236801, l='ClientLevel', x=0.87, y=76.00, z=46.15], RemoteClientPlayerEntity['_DeDnEvTrUsAx_'/3590744, l='ClientLevel', x=1.59, y=76.00, z=43.32], RemoteClientPlayerEntity['romin_amq'/4607936, l='ClientLevel', x=29.52, y=87.00, z=-0.30], RemoteClientPlayerEntity['fixerBp'/4342222, l='ClientLevel', x=-40.30, y=87.00, z=41.48], RemoteClientPlayerEntity['LonelyWanderer'/4275705, l='ClientLevel', x=28.10, y=87.00, z=46.96], RemoteClientPlayerEntity['athetanya31'/4643478, l='ClientLevel', x=31.19, y=87.00, z=46.63], RemoteClientPlayerEntity['Xnt6OnJ'/4898138, l='ClientLevel', x=3.22, y=90.00, z=2.01], RemoteClientPlayerEntity['nekotinov'/4139792, l='ClientLevel', x=-1.98, y=90.00, z=0.97], RemoteClientPlayerEntity['DARCARMENYT'/4644440, l='ClientLevel', x=-11.50, y=87.00, z=50.50], RemoteClientPlayerEntity['§8-578'/-578, l='ClientLevel', x=45.50, y=87.00, z=17.50], RemoteClientPlayerEntity['§8-599'/-599, l='ClientLevel', x=17.50, y=87.00, z=55.50], RemoteClientPlayerEntity['§8-541'/-541, l='ClientLevel', x=-27.50, y=96.00, z=52.50]]
+	Chunk stats: Client Chunk Cache: 441, 289
+	Level dimension: minecraft:spawn
+	Level spawn location: World: (7,87,6), Chunk: (at 7,5,6 in 0,0; contains blocks 0,0,0 to 15,255,15), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+	Level time: 89529 game time, 67 day time
+	Server brand: §6Spooky§cTime.net <- §6Spooky§cCore 1.16.5
+	Server type: Non-integrated multiplayer server
+Stacktrace:
+	at net.minecraft.client.world.ClientWorld.fillCrashReport(ClientWorld.java:529)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:1874)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:553)
+	at net.minecraft.client.main.Main.main(Main.java:199)
+	at Start.main(Start.java:47)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.16.5
+	Minecraft Version ID: 1.16.5
+	Operating System: Windows 11 (amd64) version 10.0
+	Java Version: 21.0.10, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
+	Memory: 168731592 bytes (160 MB) / 713031680 bytes (680 MB) up to 2147483648 bytes (2048 MB)
+	CPUs: 12
+	JVM Flags: 4 total; -Xmx2G -Xms512m -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC
+	Launched Version: mcp
+	Backend library: LWJGL version 3.2.2 build 10
+	Backend API: NVIDIA GeForce RTX 3080/PCIe/SSE2 GL version 4.6.0 NVIDIA 595.97, NVIDIA Corporation
+	GL Caps: Using framebuffer using OpenGL 3.0
+	Using VBOs: Yes
+	Is Modded: Very likely; Jar signature invalidated
+	Type: Client (map_client.txt)
+	Graphics mode: fast
+	Resource Packs: vanilla, file/§b§ltgk - @podvalsn1wers 1074.zip (incompatible)
+	Current Language: English (US)
+	CPU: 12x AMD Ryzen 5 5600 6-Core Processor 
+	OptiFine Version: OptiFine_1.16.5_HD_U_G8
+	OptiFine Build: ~~NULL~~
+	Render Distance Chunks: 8
+	Mipmaps: 4
+	Anisotropic Filtering: 1
+	Antialiasing: 0
+	Multitexture: false
+	Shaders: ~~NULL~~
+	OpenGlVersion: 4.6.0 NVIDIA 595.97
+	OpenGlRenderer: NVIDIA GeForce RTX 3080/PCIe/SSE2
+	OpenGlVendor: NVIDIA Corporation
+	CpuCount: 12

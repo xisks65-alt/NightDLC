@@ -1,0 +1,98 @@
+---- Minecraft Crash Report ----
+// You're mean.
+
+Time: 21.09.2025, 05:59
+Description: mouseClicked event handler
+
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at dev.wh1tew1ndows.client.utils.render.font.Font.draw(Font.java:350)
+	at dev.wh1tew1ndows.client.utils.render.font.Font.draw(Font.java:345)
+	at dev.wh1tew1ndows.client.utils.render.font.Font.draw(Font.java:308)
+	at dev.wh1tew1ndows.client.utils.render.font.Font.lambda$drawSplitted$0(Font.java:286)
+	at dev.wh1tew1ndows.client.utils.render.font.Font.splitted(Font.java:301)
+	at dev.wh1tew1ndows.client.utils.render.font.Font.drawSplitted(Font.java:286)
+	at dev.wh1tew1ndows.client.screen.clickgui.component.setting.SettingComponent.drawName(SettingComponent.java:50)
+	at dev.wh1tew1ndows.client.screen.clickgui.component.setting.impl.ModeSettingComponent.mouseClicked(ModeSettingComponent.java:180)
+	at dev.wh1tew1ndows.client.screen.clickgui.component.module.ModuleComponent.lambda$mouseClicked$10(ModuleComponent.java:319)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1625)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at dev.wh1tew1ndows.client.screen.clickgui.component.module.ModuleComponent.mouseClicked(ModuleComponent.java:319)
+	at dev.wh1tew1ndows.client.screen.clickgui.component.category.CategoryComponent.mouseClicked(CategoryComponent.java:98)
+	at dev.wh1tew1ndows.client.screen.clickgui.component.Panel.mouseClicked(Panel.java:172)
+	at dev.wh1tew1ndows.client.screen.clickgui.ClickGuiScreen.mouseClicked(ClickGuiScreen.java:215)
+	at net.minecraft.client.MouseHelper.lambda$mouseButtonCallback$0(MouseHelper.java:133)
+
+-- Affected screen --
+Details:
+	Screen name: dev.wh1tew1ndows.client.screen.clickgui.ClickGuiScreen
+Stacktrace:
+	at net.minecraft.client.gui.screen.Screen.wrapScreenError(Screen.java:435)
+	at net.minecraft.client.MouseHelper.mouseButtonCallback(MouseHelper.java:131)
+	at net.minecraft.client.MouseHelper.lambda$registerCallbacks$4(MouseHelper.java:235)
+	at net.minecraft.util.concurrent.ThreadTaskExecutor.execute(ThreadTaskExecutor.java:91)
+	at net.minecraft.client.MouseHelper.lambda$registerCallbacks$5(MouseHelper.java:234)
+	at org.lwjgl.glfw.GLFWMouseButtonCallbackI.callback(GLFWMouseButtonCallbackI.java:36)
+	at org.lwjgl.system.JNI.invokeV(Native Method)
+	at org.lwjgl.glfw.GLFW.glfwPollEvents(GLFW.java:3101)
+	at net.mojang.blaze3d.systems.RenderSystem.flipFrame(RenderSystem.java:88)
+
+-- Affected level --
+Details:
+	All players: 1 total; [ClientPlayerEntity['kepsTarget'/1, l='ClientLevel', x=96.15, y=80.00, z=23549.65]]
+	Chunk stats: Client Chunk Cache: 441, 272
+	Level dimension: minecraft:overworld
+	Level spawn location: World: (97,78,23505), Chunk: (at 1,4,1 in 6,1469; contains blocks 96,0,23504 to 111,255,23519), Region: (0,45; contains chunks 0,1440 to 31,1471, blocks 0,0,23040 to 511,255,23551)
+	Level time: 60 game time, 23000 day time
+	Server brand: vanilla
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.world.ClientWorld.fillCrashReport(ClientWorld.java:529)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:1859)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:538)
+	at net.minecraft.client.main.Main.main(Main.java:194)
+	at Start.main(Start.java:17)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.16.5
+	Minecraft Version ID: 1.16.5
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 17.0.15, Amazon.com Inc.
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Amazon.com Inc.
+	Memory: 397716896 bytes (379 MB) / 1463812096 bytes (1396 MB) up to 8556380160 bytes (8160 MB)
+	CPUs: 16
+	JVM Flags: 0 total; 
+	Launched Version: mcp
+	Backend library: LWJGL version 3.2.2 build 10
+	Backend API: NVIDIA GeForce RTX 3060/PCIe/SSE2 GL version 4.6.0 NVIDIA 581.29, NVIDIA Corporation
+	GL Caps: Using framebuffer using OpenGL 3.0
+	Using VBOs: Yes
+	Is Modded: Very likely; Jar signature invalidated
+	Type: Client (map_client.txt)
+	Graphics mode: fast
+	Resource Packs: vanilla
+	Current Language: Русский (Россия)
+	CPU: 16x AMD Ryzen 7 5700G with Radeon Graphics 
+	OptiFine Version: OptiFine_1.16.5_HD_U_G8
+	OptiFine Build: ~~NULL~~
+	Render Distance Chunks: 8
+	Mipmaps: 4
+	Anisotropic Filtering: 1
+	Antialiasing: 0
+	Multitexture: false
+	Shaders: ~~NULL~~
+	OpenGlVersion: 4.6.0 NVIDIA 581.29
+	OpenGlRenderer: NVIDIA GeForce RTX 3060/PCIe/SSE2
+	OpenGlVendor: NVIDIA Corporation
+	CpuCount: 16
