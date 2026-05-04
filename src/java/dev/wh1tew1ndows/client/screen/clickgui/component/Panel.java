@@ -16,6 +16,7 @@ import dev.wh1tew1ndows.client.utils.render.draw.Round;
 import dev.wh1tew1ndows.client.utils.render.draw.Scissor;
 import dev.wh1tew1ndows.client.utils.render.draw.StencilUtil;
 import dev.wh1tew1ndows.client.utils.render.font.Fonts;
+import dev.wh1tew1ndows.client.managers.module.impl.render.InterFace;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.client.Minecraft;
@@ -183,7 +184,7 @@ public class Panel implements IScreen, IWindow {
 
         drawLeftPanel(matrix, gx, gy, mouseX, mouseY, ai);
 
-        // ── верхняя полоса ──
+        // ── верхняя полоса с закруглением справа ──
         RenderUtil.Rounded.smooth(matrix, gx + LEFT_W + 1, gy, GUI_W - LEFT_W - 1, TOP_H,
                 ColorUtil.replAlpha(ColorUtil.getColor(12, 12, 16), ai), Round.of(0, 8, 0, 0));
         // акцентная линия под верхней полосой
@@ -200,13 +201,16 @@ public class Panel implements IScreen, IWindow {
         float contentH = GUI_H - TOP_H - 6;
         float colW = (contentW - 5f) / 2f;
 
-        // контентная область с лёгким градиентом
+        // контентная область с градиентом и закруглением
         RenderUtil.Rounded.smooth(matrix, contentX, contentY, contentW, contentH,
                 ColorUtil.replAlpha(ColorUtil.getColor(18, 18, 22), ai),
                 ColorUtil.replAlpha(ColorUtil.getColor(18, 18, 22), ai),
-                ColorUtil.replAlpha(ColorUtil.getColor(16, 16, 20), ai),
-                ColorUtil.replAlpha(ColorUtil.getColor(16, 16, 20), ai),
-                Round.of(0));
+                ColorUtil.replAlpha(ColorUtil.getColor(14, 14, 18), ai),
+                ColorUtil.replAlpha(ColorUtil.getColor(14, 14, 18), ai),
+                Round.of(0, 0, 8, 0));
+
+        // декоративные элементы в контентной области
+        drawContentDecorations(matrix, contentX, contentY, contentW, contentH, ai);
 
         Scissor.push();
         Scissor.setFromComponentCoordinates(contentX - 1, contentY - 1, contentW + 2, contentH + 2);
@@ -355,9 +359,12 @@ public class Panel implements IScreen, IWindow {
         float arrowX = bx + Fonts.MONTSERRAT_BOLD.getWidth("Zetrix Client", 5.5F) + 4;
         Fonts.MONTSERRAT_BOLD.draw(ms, ">", arrowX, ty,
                 ColorUtil.replAlpha(ColorUtil.getColor(60), ai), 5.5F);
-        Fonts.MONTSERRAT_BOLD.draw(ms, currentCategory.getName(),
-                arrowX + Fonts.MONTSERRAT_BOLD.getWidth("> ", 5.5F) + 2, ty,
-                ColorUtil.replAlpha(ColorUtil.getColor(215), ai), 5.5F);
+        float catNameX = arrowX + Fonts.MONTSERRAT_BOLD.getWidth("> ", 5.5F) + 2;
+        int catNameCol = ColorUtil.replAlpha(ColorUtil.multBright(InterFace.getInstance().themeColor(), 0.8F), ai);
+        Fonts.MONTSERRAT_BOLD.draw(ms, currentCategory.getName(), catNameX, ty, catNameCol, 5.5F);
+        float catNameW = Fonts.MONTSERRAT_BOLD.getWidth(currentCategory.getName(), 5.5F);
+        RenderUtil.Shadow.drawShadow(ms, catNameX, ty - 1, catNameW, 8, 4,
+                ColorUtil.replAlpha(InterFace.getInstance().themeColor(), (int)(ai * 0.1f)));
     }
 
     // ── scrollbar ─────────────────────────────────────────────────────────────
@@ -382,6 +389,86 @@ public class Panel implements IScreen, IWindow {
                 ColorUtil.replAlpha(ColorUtil.multDark(ColorUtil.fade(), 0.4F), (int)(ai * 0.3f)));
         RenderUtil.Rounded.smooth(ms, gx + GUI_W - 4, barY, 2, barH, scrollCol, Round.of(1));
         StencilUtil.disable();
+    }
+
+    // ── content decorations ──────────────────────────────────────────────────
+
+    private void drawContentDecorations(MatrixStack ms, float cx, float cy, float cw, float ch, int ai) {
+        int themeColor = InterFace.getInstance().themeColor();
+        float time = (System.currentTimeMillis() - ClickGuiScreen.startTime) / 1000f;
+
+        // угловые акценты — L-образные линии в углах контентной области
+        float cornerLen = 16f;
+        float cornerThick = 0.5f;
+        float cornerAlpha = 0.12f + 0.04f * (float) Math.sin(time * 1.5);
+        int cornerCol = ColorUtil.replAlpha(ColorUtil.multDark(themeColor, 0.6F), (int)(ai * cornerAlpha));
+
+        // верхний левый
+        RenderUtil.Rounded.smooth(ms, cx + 2, cy + 2, cornerLen, cornerThick, cornerCol, Round.of(0));
+        RenderUtil.Rounded.smooth(ms, cx + 2, cy + 2, cornerThick, cornerLen, cornerCol, Round.of(0));
+        // верхний правый
+        RenderUtil.Rounded.smooth(ms, cx + cw - 2 - cornerLen, cy + 2, cornerLen, cornerThick, cornerCol, Round.of(0));
+        RenderUtil.Rounded.smooth(ms, cx + cw - 2 - cornerThick, cy + 2, cornerThick, cornerLen, cornerCol, Round.of(0));
+        // нижний левый
+        RenderUtil.Rounded.smooth(ms, cx + 2, cy + ch - 2 - cornerThick, cornerLen, cornerThick, cornerCol, Round.of(0));
+        RenderUtil.Rounded.smooth(ms, cx + 2, cy + ch - 2 - cornerLen, cornerThick, cornerLen, cornerCol, Round.of(0));
+        // нижний правый
+        RenderUtil.Rounded.smooth(ms, cx + cw - 2 - cornerLen, cy + ch - 2 - cornerThick, cornerLen, cornerThick, cornerCol, Round.of(0));
+        RenderUtil.Rounded.smooth(ms, cx + cw - 2 - cornerThick, cy + ch - 2 - cornerLen, cornerThick, cornerLen, cornerCol, Round.of(0));
+
+        // центральное акцентное свечение (пульсирующее) — большой мягкий градиент по центру
+        float pulseAlpha = 0.03f + 0.015f * (float) Math.sin(time * 0.8);
+        float glowW = cw * 0.5f;
+        float glowH = ch * 0.4f;
+        float glowX = cx + (cw - glowW) / 2f;
+        float glowY = cy + (ch - glowH) / 2f;
+        RenderUtil.Shadow.drawShadow(ms, glowX, glowY, glowW, glowH, 30,
+                ColorUtil.replAlpha(ColorUtil.multDark(themeColor, 0.4F), (int)(ai * pulseAlpha)));
+
+        // тонкие горизонтальные линии-сетка (декоративный паттерн)
+        float gridSpacing = 32f;
+        float gridAlpha = 0.025f;
+        int gridCol = ColorUtil.replAlpha(ColorUtil.getColor(255), (int)(ai * gridAlpha));
+        for (float ly = cy + gridSpacing; ly < cy + ch - gridSpacing; ly += gridSpacing) {
+            RenderUtil.Rounded.smooth(ms, cx + 8, ly, cw - 16, 0.3f, gridCol, Round.of(0));
+        }
+
+        // вертикальная разделительная линия по центру (разделяет два столбца)
+        float divX = cx + cw / 2f - 0.15f;
+        int divTop = ColorUtil.replAlpha(ColorUtil.multDark(themeColor, 0.3F), (int)(ai * 0.06f));
+        int divBot = ColorUtil.replAlpha(ColorUtil.multDark(themeColor, 0.15F), (int)(ai * 0.03f));
+        RenderUtil.Rounded.smooth(ms, divX, cy + 8, 0.3f, ch - 16, divTop, divTop, divBot, divBot, Round.of(0));
+
+        // нижний градиент (fade to dark) — виньетка внизу
+        float fadeH = 40f;
+        int fadeTop = ColorUtil.replAlpha(ColorUtil.getColor(0), 0);
+        int fadeBot = ColorUtil.replAlpha(ColorUtil.getColor(14, 14, 18), (int)(ai * 0.7f));
+        RenderUtil.Rounded.smooth(ms, cx, cy + ch - fadeH, cw, fadeH,
+                fadeTop, fadeTop, fadeBot, fadeBot, Round.of(0, 0, 8, 0));
+
+        // верхний градиент (fade from header)
+        float topFadeH = 20f;
+        int topFadeTop = ColorUtil.replAlpha(ColorUtil.getColor(12, 12, 16), (int)(ai * 0.5f));
+        int topFadeBot = ColorUtil.replAlpha(ColorUtil.getColor(0), 0);
+        RenderUtil.Rounded.smooth(ms, cx, cy, cw, topFadeH,
+                topFadeTop, topFadeTop, topFadeBot, topFadeBot, Round.of(0));
+
+        // плавающие точки-частицы (статические, но мерцающие)
+        float[][] dots = {
+            {0.15f, 0.25f, 1.2f}, {0.75f, 0.18f, 0.9f}, {0.4f, 0.65f, 1.5f},
+            {0.85f, 0.55f, 0.7f}, {0.25f, 0.8f, 1.1f}, {0.6f, 0.4f, 1.3f},
+            {0.9f, 0.85f, 0.8f}, {0.1f, 0.5f, 1.0f}, {0.5f, 0.1f, 1.4f}
+        };
+        for (float[] dot : dots) {
+            float dx = cx + dot[0] * cw;
+            float dy = cy + dot[1] * ch;
+            float dotAlpha = 0.06f + 0.04f * (float) Math.sin(time * dot[2] + dot[0] * 10);
+            float dotSize = 1.5f + 0.5f * (float) Math.sin(time * dot[2] * 0.5f + dot[1] * 5);
+            int dotCol = ColorUtil.replAlpha(themeColor, (int)(ai * dotAlpha));
+            RenderUtil.Rounded.smooth(ms, dx - dotSize / 2, dy - dotSize / 2, dotSize, dotSize, dotCol, Round.of(dotSize / 2));
+            RenderUtil.Shadow.drawShadow(ms, dx - dotSize, dy - dotSize, dotSize * 2, dotSize * 2, 4,
+                    ColorUtil.replAlpha(themeColor, (int)(ai * dotAlpha * 0.5f)));
+        }
     }
 
     // ── mouse / keyboard ──────────────────────────────────────────────────────
